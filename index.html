@@ -1723,69 +1723,88 @@ END:VCALENDAR`;
     }
 
     // ========== КАРУСЕЛЬ ==========
-    (function() {
-        const gallery = document.getElementById('galleryGrid');
-        const prevBtn = document.querySelector('.gallery-prev');
-        const nextBtn = document.querySelector('.gallery-next');
-        let autoScrollInterval;
-        const scrollDelay = 3000;
+    // Карусель для галереи (с бесконечной прокруткой)
+(function() {
+    const gallery = document.getElementById('galleryGrid');
+    const prevBtn = document.querySelector('.gallery-prev');
+    const nextBtn = document.querySelector('.gallery-next');
+    let autoScrollInterval;
+    const scrollDelay = 3000; // 3 секунды
 
-        function scrollToNext() {
-            if (!gallery) return;
-            const itemWidth = gallery.querySelector('.gallery-item')?.offsetWidth || 0;
-            const gap = 25;
-            gallery.scrollBy({ left: itemWidth + gap, behavior: 'smooth' });
-        }
+    // Вспомогательная функция для получения ширины элемента + gap
+    function getScrollStep() {
+        const item = gallery.querySelector('.gallery-item');
+        if (!item) return 0;
+        const style = window.getComputedStyle(gallery);
+        const gap = parseInt(style.gap) || 25; // берём gap из CSS
+        return item.offsetWidth + gap;
+    }
 
-        function scrollToPrev() {
-            if (!gallery) return;
-            const itemWidth = gallery.querySelector('.gallery-item')?.offsetWidth || 0;
-            const gap = 25;
-            gallery.scrollBy({ left: -(itemWidth + gap), behavior: 'smooth' });
+    function scrollToNext() {
+        if (!gallery) return;
+        const step = getScrollStep();
+        const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+        // Если дошли до конца (с погрешностью), перематываем в начало
+        if (gallery.scrollLeft + step >= maxScroll - 1) {
+            gallery.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            gallery.scrollBy({ left: step, behavior: 'smooth' });
         }
+    }
 
-        function startAutoScroll() {
-            if (autoScrollInterval) clearInterval(autoScrollInterval);
-            autoScrollInterval = setInterval(scrollToNext, scrollDelay);
+    function scrollToPrev() {
+        if (!gallery) return;
+        const step = getScrollStep();
+        // Если в начале (или почти), перематываем в конец
+        if (gallery.scrollLeft - step <= 0) {
+            gallery.scrollTo({ left: gallery.scrollWidth, behavior: 'smooth' });
+        } else {
+            gallery.scrollBy({ left: -step, behavior: 'smooth' });
         }
+    }
 
-        function stopAutoScroll() {
-            if (autoScrollInterval) {
-                clearInterval(autoScrollInterval);
-                autoScrollInterval = null;
-            }
-        }
+    function startAutoScroll() {
+        if (autoScrollInterval) clearInterval(autoScrollInterval);
+        autoScrollInterval = setInterval(scrollToNext, scrollDelay);
+    }
 
-        let restartTimeout;
-        function pauseAndRestart() {
-            stopAutoScroll();
-            if (restartTimeout) clearTimeout(restartTimeout);
-            restartTimeout = setTimeout(startAutoScroll, 1000);
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+            autoScrollInterval = null;
         }
+    }
 
-        if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                scrollToPrev();
-                pauseAndRestart();
-            });
-        }
-        if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                scrollToNext();
-                pauseAndRestart();
-            });
-        }
+    let restartTimeout;
+    function pauseAndRestart() {
+        stopAutoScroll();
+        if (restartTimeout) clearTimeout(restartTimeout);
+        restartTimeout = setTimeout(startAutoScroll, 10000); // пауза 10 сек после ручного вмешательства
+    }
 
-        if (gallery) {
-            gallery.addEventListener('scroll', pauseAndRestart, { passive: true });
-            gallery.addEventListener('mouseenter', stopAutoScroll);
-            gallery.addEventListener('mouseleave', startAutoScroll);
-        }
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToPrev();
+            pauseAndRestart();
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToNext();
+            pauseAndRestart();
+        });
+    }
 
-        startAutoScroll();
-    })();
+    if (gallery) {
+        gallery.addEventListener('scroll', pauseAndRestart, { passive: true });
+        gallery.addEventListener('mouseenter', stopAutoScroll);
+        gallery.addEventListener('mouseleave', startAutoScroll);
+    }
+
+    startAutoScroll();
+})();
 </script>
 </body>
 </html>
