@@ -1061,7 +1061,7 @@
         margin: 0 5px;
     }
 }
-        @media (max-width: 768px) {
+@media (max-width: 768px) {
     .gallery-item {
         width: 200px;
         height: 200px;
@@ -1075,6 +1075,59 @@
     .gallery-item {
         width: 150px;
         height: 150px;
+    }
+}
+
+.crossword-cell {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid var(--metal-silver);
+    border-radius: 5px;
+    background: white;
+    color: var(--text-dark);
+    transition: all 0.2s;
+    box-sizing: border-box;
+    padding: 0;
+}
+.crossword-cell:focus {
+    outline: none;
+    border-color: var(--metal-dark);
+    box-shadow: 0 0 8px rgba(168,168,168,0.5);
+}
+.crossword-cell.black {
+    background: transparent;
+    border-color: transparent;
+    pointer-events: none;
+}
+.crossword-cell.correct {
+    background: #d4edda;
+    border-color: #28a745;
+}
+.crossword-cell.incorrect {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+.crossword-number {
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    font-size: 0.7rem;
+    font-weight: normal;
+    color: #5a4a57;
+    pointer-events: none;
+}
+@media (max-width: 480px) {
+    .crossword-cell {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+    .crossword-number {
+        font-size: 0.5rem;
     }
 }
     </style>
@@ -1303,6 +1356,50 @@
             </div>
         </footer>
     </div>
+
+
+
+
+<!-- Интерактивный кроссворд "Мы знакомы?" (точная сетка) -->
+<section class="section" id="crossword">
+    <h2 class="section-title">Мы знакомы?</h2>
+    <p style="text-align: center; margin-bottom: 20px;">Впишите буквы в клетки и нажмите «Проверить»</p>
+
+    <!-- Сетка кроссворда 13x10 -->
+    <div id="crossword-grid" style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; max-width: 550px; margin: 0 auto; background: var(--metal-silver); padding: 5px; border-radius: 10px;"></div>
+
+    <!-- Вопросы -->
+    <div style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+        <div>
+            <h3 style="color: var(--text-dark);">По горизонтали:</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><strong>1.</strong> Как Юля называет Борю?</li>
+                <li><strong>3.</strong> Любимый цвет Бори</li>
+                <li><strong>7.</strong> Фамилия Бори</li>
+                <li><strong>8.</strong> Как зовут нашего питомца?</li>
+                <li><strong>9.</strong> Фамилия Юли</li>
+            </ul>
+        </div>
+        <div>
+            <h3 style="color: var(--text-dark);">По вертикали:</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><strong>2.</strong> Страна последнего путешествия</li>
+                <li><strong>4.</strong> Любимый цвет Юли</li>
+                <li><strong>5.</strong> Место где мы познакомились?</li>
+                <li><strong>6.</strong> Куда мы отправились в первую поездку</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Кнопка проверки и результат -->
+    <div style="text-align: center; margin-top: 40px;">
+        <button id="checkCrossword" class="metal-button" style="display: inline-block;">Проверить</button>
+        <div id="crosswordResult" style="margin-top: 20px; font-size: 1.2rem; font-weight: bold;"></div>
+    </div>
+</section>
+
+
+
 
     <script>
     // ========== ДЕКОРАТИВНЫЕ ЭФФЕКТЫ (блёстки, пузырьки, эмодзи) ==========
@@ -1779,7 +1876,7 @@ END:VCALENDAR`;
     function pauseAndRestart() {
         stopAutoScroll();
         if (restartTimeout) clearTimeout(restartTimeout);
-        restartTimeout = setTimeout(startAutoScroll, 10000); // пауза 10 сек после ручного вмешательства
+        restartTimeout = setTimeout(startAutoScroll, 1000); // пауза 10 сек после ручного вмешательства
     }
 
     if (prevBtn) {
@@ -1804,6 +1901,231 @@ END:VCALENDAR`;
     }
 
     startAutoScroll();
+})();
+
+(function() {
+    // Создаём пустую сетку 13 строк x 10 столбцов, заполненную null
+    const rows = 13;
+    const cols = 10;
+    const gridData = Array(rows).fill().map(() => Array(cols).fill(null));
+
+    // Заполняем буквами по словам (все буквы заглавные)
+    // Слово 1: шмупс
+    gridData[0][0] = 'Ш';
+    gridData[0][1] = 'М';
+    gridData[0][2] = 'У';
+    gridData[0][3] = 'П';
+    gridData[0][4] = 'С';
+
+    // Слово 2: малайзия
+    gridData[0][1] = 'М'; // уже есть
+    gridData[1][1] = 'А';
+    gridData[2][1] = 'Л';
+    gridData[3][1] = 'А';
+    gridData[4][1] = 'Й';
+    gridData[5][1] = 'З';
+    gridData[6][1] = 'И';
+    gridData[7][1] = 'Я';
+
+    // Слово 7: кириллов
+    gridData[6][0] = 'К';
+    gridData[6][1] = 'И'; // уже есть
+    gridData[6][2] = 'Р';
+    gridData[6][3] = 'И';
+    gridData[6][4] = 'Л';
+    gridData[6][5] = 'Л';
+    gridData[6][6] = 'О';
+    gridData[6][7] = 'В';
+
+    // Слово 6: питер
+    gridData[5][3] = 'П';
+    gridData[6][3] = 'И'; // уже есть
+    gridData[7][3] = 'Т';
+    gridData[8][3] = 'Е';
+    gridData[9][3] = 'Р';
+
+    // Слово 8: мира
+    gridData[9][1] = 'М';
+    gridData[9][2] = 'И';
+    gridData[9][3] = 'Р'; // уже есть
+    gridData[9][4] = 'А';
+
+    // Слово 5: кальянная
+    gridData[4][5] = 'К';
+    gridData[5][5] = 'А';
+    gridData[6][5] = 'Л'; // уже есть
+    gridData[7][5] = 'Ь';
+    gridData[8][5] = 'Я';
+    gridData[9][5] = 'Н';
+    gridData[10][5] = 'Н';
+    gridData[11][5] = 'А';
+    gridData[12][5] = 'Я';
+
+    // Слово 9: лях
+    gridData[12][4] = 'Л';
+    gridData[12][5] = 'Я'; // уже есть
+    gridData[12][6] = 'Х';
+
+    // Слово 4: розовый
+    gridData[2][7] = 'Р';
+    gridData[3][7] = 'О';
+    gridData[4][7] = 'З';
+    gridData[5][7] = 'О';
+    gridData[6][7] = 'В'; // уже есть
+    gridData[7][7] = 'Ы';
+    gridData[8][7] = 'Й';
+
+    // Слово 3: серый
+    gridData[2][5] = 'С';
+    gridData[2][6] = 'Е';
+    gridData[2][7] = 'Р'; // уже есть
+    gridData[2][8] = 'Ы';
+    gridData[2][9] = 'Й';
+
+    // Позиции номеров (начало каждого слова)
+    const numberPositions = [
+        { row: 0, col: 0, number: 1 }, // шмупс
+        { row: 0, col: 1, number: 2 }, // малайзия
+        { row: 2, col: 5, number: 3 }, // серый
+        { row: 2, col: 7, number: 4 }, // розовый
+        { row: 4, col: 5, number: 5 }, // кальянная
+        { row: 5, col: 3, number: 6 }, // питер
+        { row: 6, col: 0, number: 7 }, // кириллов
+        { row: 9, col: 1, number: 8 }, // мира
+        { row: 12, col: 4, number: 9 } // лях
+    ];
+
+    const container = document.getElementById('crossword-grid');
+    if (!container) return;
+
+    // Создаём все ячейки
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            const letter = gridData[row][col];
+            const cell = document.createElement('div');
+            cell.className = 'crossword-cell';
+            
+            if (letter === null) {
+                cell.classList.add('black');
+                container.appendChild(cell);
+                continue;
+            }
+            
+            // Создаём input
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.setAttribute('data-letter', letter);
+            input.setAttribute('maxlength', '1');
+            input.inputMode = 'text';
+            input.autocomplete = 'off';
+            input.spellcheck = false;
+            input.style.width = '100%';
+            input.style.height = '100%';
+            input.style.border = 'none';
+            input.style.background = 'transparent';
+            input.style.fontSize = 'inherit';
+            input.style.fontWeight = 'bold';
+            input.style.textAlign = 'center';
+            input.style.padding = '0';
+            input.style.outline = 'none';
+            input.classList.add('crossword-input');
+            
+            cell.appendChild(input);
+            
+            // Добавляем номер, если есть
+            const numPos = numberPositions.find(p => p.row === row && p.col === col);
+            if (numPos) {
+                const numberSpan = document.createElement('span');
+                numberSpan.className = 'crossword-number';
+                numberSpan.textContent = numPos.number;
+                cell.appendChild(numberSpan);
+            }
+            
+            container.appendChild(cell);
+        }
+    }
+
+    // Автоматический переход между активными ячейками
+    const activeInputs = document.querySelectorAll('.crossword-cell:not(.black) .crossword-input');
+    activeInputs.forEach((input, index) => {
+        input.addEventListener('input', function(e) {
+            if (this.value.length === 1) {
+                const next = activeInputs[index + 1];
+                if (next) next.focus();
+            }
+        });
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '') {
+                const prev = activeInputs[index - 1];
+                if (prev) prev.focus();
+            }
+        });
+    });
+
+    // Проверка (регистронезависимая)
+    document.getElementById('checkCrossword').addEventListener('click', function() {
+        let correctCount = 0;
+        activeInputs.forEach(input => {
+            const userLetter = input.value.trim().toUpperCase();
+            const correctLetter = input.dataset.letter.toUpperCase();
+            if (userLetter === correctLetter) {
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+                correctCount++;
+            } else {
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+            }
+        });
+        const total = activeInputs.length;
+        const resultDiv = document.getElementById('crosswordResult');
+        if (correctCount === total) {
+            resultDiv.innerHTML = '🎉 Поздравляем! Вы разгадали кроссворд! 🎉';
+            resultDiv.style.color = '#28a745';
+            // Конфетти
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    if (typeof createCelebrationGlitter === 'function') {
+                        createCelebrationGlitter(x, y);
+                    } else {
+                        // Запасной вариант
+                        const glitter = document.createElement('div');
+                        glitter.style.position = 'fixed';
+                        glitter.style.width = '8px';
+                        glitter.style.height = '8px';
+                        glitter.style.background = `rgba(${Math.random()*255},${Math.random()*255},255,0.9)`;
+                        glitter.style.borderRadius = '50%';
+                        glitter.style.pointerEvents = 'none';
+                        glitter.style.zIndex = '9999';
+                        glitter.style.left = x + 'px';
+                        glitter.style.top = y + 'px';
+                        glitter.style.boxShadow = '0 0 10px rgba(255,255,255,0.8)';
+                        glitter.style.animation = 'celebration 1.5s ease-out forwards';
+                        document.body.appendChild(glitter);
+                        setTimeout(() => glitter.remove(), 1500);
+                    }
+                }, i * 50);
+            }
+        } else {
+            resultDiv.innerHTML = `Вы отгадали ${correctCount} из ${total} букв. Попробуйте ещё!`;
+            resultDiv.style.color = '#dc3545';
+        }
+    });
+
+    // Добавляем анимацию для конфетти, если её нет
+    if (!document.querySelector('#celebration-style')) {
+        const style = document.createElement('style');
+        style.id = 'celebration-style';
+        style.textContent = `
+            @keyframes celebration {
+                0% { transform: translateY(0) scale(1); opacity: 1; }
+                100% { transform: translateY(-100px) scale(0); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 })();
 </script>
 </body>
