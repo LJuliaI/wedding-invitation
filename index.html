@@ -1082,21 +1082,23 @@
     position: relative;
     width: 40px;
     height: 40px;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
     border: 2px solid var(--metal-silver);
     border-radius: 5px;
     background: white;
-    color: var(--text-dark);
-    transition: all 0.2s;
     box-sizing: border-box;
     padding: 0;
+    transition: all 0.2s;
 }
-.crossword-cell:focus {
+.crossword-cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0;
     outline: none;
-    border-color: var(--metal-dark);
-    box-shadow: 0 0 8px rgba(168,168,168,0.5);
 }
 .crossword-cell.black {
     background: transparent;
@@ -1124,6 +1126,8 @@
     .crossword-cell {
         width: 30px;
         height: 30px;
+    }
+    .crossword-cell input {
         font-size: 1.2rem;
     }
     .crossword-number {
@@ -1365,10 +1369,8 @@
     <h2 class="section-title">Мы знакомы?</h2>
     <p style="text-align: center; margin-bottom: 20px;">Впишите буквы в клетки и нажмите «Проверить»</p>
 
-    <!-- Сетка кроссворда 13x10 -->
     <div id="crossword-grid" style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; max-width: 550px; margin: 0 auto; background: var(--metal-silver); padding: 5px; border-radius: 10px;"></div>
 
-    <!-- Вопросы -->
     <div style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
         <div>
             <h3 style="color: var(--text-dark);">По горизонтали:</h3>
@@ -1391,7 +1393,6 @@
         </div>
     </div>
 
-    <!-- Кнопка проверки и результат -->
     <div style="text-align: center; margin-top: 40px;">
         <button id="checkCrossword" class="metal-button" style="display: inline-block;">Проверить</button>
         <div id="crosswordResult" style="margin-top: 20px; font-size: 1.2rem; font-weight: bold;"></div>
@@ -1904,20 +1905,18 @@ END:VCALENDAR`;
 })();
 
 (function() {
-    // Создаём пустую сетку 13 строк x 10 столбцов, заполненную null
-    const rows = 13;
-    const cols = 10;
+    // ---------- Данные сетки ----------
+    const rows = 13, cols = 10;
     const gridData = Array(rows).fill().map(() => Array(cols).fill(null));
 
-    // Заполняем буквами по словам (все буквы заглавные)
-    // Слово 1: шмупс
+    // Заполнение буквами (все заглавные)
+    // 1: ШМУПС
     gridData[0][0] = 'Ш';
     gridData[0][1] = 'М';
     gridData[0][2] = 'У';
     gridData[0][3] = 'П';
     gridData[0][4] = 'С';
-
-    // Слово 2: малайзия
+    // 2: МАЛАЙЗИЯ
     gridData[0][1] = 'М'; // уже есть
     gridData[1][1] = 'А';
     gridData[2][1] = 'Л';
@@ -1926,112 +1925,107 @@ END:VCALENDAR`;
     gridData[5][1] = 'З';
     gridData[6][1] = 'И';
     gridData[7][1] = 'Я';
-
-    // Слово 7: кириллов
+    // 7: КИРИЛЛОВ
     gridData[6][0] = 'К';
-    gridData[6][1] = 'И'; // уже есть
+    gridData[6][1] = 'И';
     gridData[6][2] = 'Р';
     gridData[6][3] = 'И';
     gridData[6][4] = 'Л';
     gridData[6][5] = 'Л';
     gridData[6][6] = 'О';
     gridData[6][7] = 'В';
-
-    // Слово 6: питер
+    // 6: ПИТЕР
     gridData[5][3] = 'П';
-    gridData[6][3] = 'И'; // уже есть
+    gridData[6][3] = 'И';
     gridData[7][3] = 'Т';
     gridData[8][3] = 'Е';
     gridData[9][3] = 'Р';
-
-    // Слово 8: мира
+    // 8: МИРА
     gridData[9][1] = 'М';
     gridData[9][2] = 'И';
-    gridData[9][3] = 'Р'; // уже есть
+    gridData[9][3] = 'Р';
     gridData[9][4] = 'А';
-
-    // Слово 5: кальянная
+    // 5: КАЛЬЯННАЯ
     gridData[4][5] = 'К';
     gridData[5][5] = 'А';
-    gridData[6][5] = 'Л'; // уже есть
+    gridData[6][5] = 'Л';
     gridData[7][5] = 'Ь';
     gridData[8][5] = 'Я';
     gridData[9][5] = 'Н';
     gridData[10][5] = 'Н';
     gridData[11][5] = 'А';
     gridData[12][5] = 'Я';
-
-    // Слово 9: лях
+    // 9: ЛЯХ
     gridData[12][4] = 'Л';
-    gridData[12][5] = 'Я'; // уже есть
+    gridData[12][5] = 'Я';
     gridData[12][6] = 'Х';
-
-    // Слово 4: розовый
+    // 4: РОЗОВЫЙ
     gridData[2][7] = 'Р';
     gridData[3][7] = 'О';
     gridData[4][7] = 'З';
     gridData[5][7] = 'О';
-    gridData[6][7] = 'В'; // уже есть
+    gridData[6][7] = 'В';
     gridData[7][7] = 'Ы';
     gridData[8][7] = 'Й';
-
-    // Слово 3: серый
+    // 3: СЕРЫЙ
     gridData[2][5] = 'С';
     gridData[2][6] = 'Е';
-    gridData[2][7] = 'Р'; // уже есть
+    gridData[2][7] = 'Р';
     gridData[2][8] = 'Ы';
     gridData[2][9] = 'Й';
 
-    // Позиции номеров (начало каждого слова)
+    // ---------- Слова и их координаты ----------
+    const words = [
+        { number: 1, cells: [[0,0],[0,1],[0,2],[0,3],[0,4]], answer: 'ШМУПС' },
+        { number: 2, cells: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1]], answer: 'МАЛАЙЗИЯ' },
+        { number: 3, cells: [[2,5],[2,6],[2,7],[2,8],[2,9]], answer: 'СЕРЫЙ' },
+        { number: 4, cells: [[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7]], answer: 'РОЗОВЫЙ' },
+        { number: 5, cells: [[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5],[11,5],[12,5]], answer: 'КАЛЬЯННАЯ' },
+        { number: 6, cells: [[5,3],[6,3],[7,3],[8,3],[9,3]], answer: 'ПИТЕР' },
+        { number: 7, cells: [[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[6,7]], answer: 'КИРИЛЛОВ' },
+        { number: 8, cells: [[9,1],[9,2],[9,3],[9,4]], answer: 'МИРА' },
+        { number: 9, cells: [[12,4],[12,5],[12,6]], answer: 'ЛЯХ' }
+    ];
+
+    // Номера в ячейках (начала слов)
     const numberPositions = [
-        { row: 0, col: 0, number: 1 }, // шмупс
-        { row: 0, col: 1, number: 2 }, // малайзия
-        { row: 2, col: 5, number: 3 }, // серый
-        { row: 2, col: 7, number: 4 }, // розовый
-        { row: 4, col: 5, number: 5 }, // кальянная
-        { row: 5, col: 3, number: 6 }, // питер
-        { row: 6, col: 0, number: 7 }, // кириллов
-        { row: 9, col: 1, number: 8 }, // мира
-        { row: 12, col: 4, number: 9 } // лях
+        { row: 0, col: 0, number: 1 },
+        { row: 0, col: 1, number: 2 },
+        { row: 2, col: 5, number: 3 },
+        { row: 2, col: 7, number: 4 },
+        { row: 4, col: 5, number: 5 },
+        { row: 5, col: 3, number: 6 },
+        { row: 6, col: 0, number: 7 },
+        { row: 9, col: 1, number: 8 },
+        { row: 12, col: 4, number: 9 }
     ];
 
     const container = document.getElementById('crossword-grid');
     if (!container) return;
 
-    // Создаём все ячейки
+    // Массив для быстрого доступа к клеткам по координатам
+    const cellDivs = Array(rows).fill().map(() => Array(cols).fill(null));
+
+    // Создание сетки
     for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
             const letter = gridData[row][col];
             const cell = document.createElement('div');
             cell.className = 'crossword-cell';
-            
+
             if (letter === null) {
                 cell.classList.add('black');
-                container.appendChild(cell);
-                continue;
+            } else {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.setAttribute('maxlength', '1');
+                input.inputMode = 'text';
+                input.autocomplete = 'off';
+                input.spellcheck = false;
+                cell.appendChild(input);
+                cellDivs[row][col] = { cell, input }; // сохраняем
             }
-            
-            // Создаём input
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.setAttribute('data-letter', letter);
-            input.setAttribute('maxlength', '1');
-            input.inputMode = 'text';
-            input.autocomplete = 'off';
-            input.spellcheck = false;
-            input.style.width = '100%';
-            input.style.height = '100%';
-            input.style.border = 'none';
-            input.style.background = 'transparent';
-            input.style.fontSize = 'inherit';
-            input.style.fontWeight = 'bold';
-            input.style.textAlign = 'center';
-            input.style.padding = '0';
-            input.style.outline = 'none';
-            input.classList.add('crossword-input');
-            
-            cell.appendChild(input);
-            
+
             // Добавляем номер, если есть
             const numPos = numberPositions.find(p => p.row === row && p.col === col);
             if (numPos) {
@@ -2040,49 +2034,73 @@ END:VCALENDAR`;
                 numberSpan.textContent = numPos.number;
                 cell.appendChild(numberSpan);
             }
-            
+
             container.appendChild(cell);
         }
     }
 
-    // Автоматический переход между активными ячейками
-    const activeInputs = document.querySelectorAll('.crossword-cell:not(.black) .crossword-input');
-    activeInputs.forEach((input, index) => {
-        input.addEventListener('input', function(e) {
+    // Автоматический переход между полями
+    const allInputs = Array.from(document.querySelectorAll('.crossword-cell:not(.black) input'));
+    allInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
             if (this.value.length === 1) {
-                const next = activeInputs[index + 1];
+                const next = allInputs[index + 1];
                 if (next) next.focus();
             }
         });
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Backspace' && this.value === '') {
-                const prev = activeInputs[index - 1];
+                const prev = allInputs[index - 1];
                 if (prev) prev.focus();
             }
         });
     });
 
-    // Проверка (регистронезависимая)
+    // ---------- Проверка ----------
     document.getElementById('checkCrossword').addEventListener('click', function() {
-        let correctCount = 0;
-        activeInputs.forEach(input => {
-            const userLetter = input.value.trim().toUpperCase();
-            const correctLetter = input.dataset.letter.toUpperCase();
-            if (userLetter === correctLetter) {
-                input.classList.add('correct');
-                input.classList.remove('incorrect');
-                correctCount++;
+        // Сначала убираем подсветку со всех клеток
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                const cell = cellDivs[row][col]?.cell;
+                if (cell) {
+                    cell.classList.remove('correct', 'incorrect');
+                }
+            }
+        }
+
+        let correctWords = 0;
+
+        // Проверяем каждое слово
+        words.forEach(word => {
+            // Собираем введённые буквы
+            const entered = word.cells.map(([r, c]) => {
+                const input = cellDivs[r][c]?.input;
+                return input ? input.value.trim().toUpperCase() : '';
+            }).join('');
+
+            if (entered === word.answer) {
+                correctWords++;
+                // Подсвечиваем все клетки слова зелёным
+                word.cells.forEach(([r, c]) => {
+                    const cell = cellDivs[r][c]?.cell;
+                    if (cell) cell.classList.add('correct');
+                });
             } else {
-                input.classList.add('incorrect');
-                input.classList.remove('correct');
+                // Подсвечиваем все клетки слова красным
+                word.cells.forEach(([r, c]) => {
+                    const cell = cellDivs[r][c]?.cell;
+                    if (cell) cell.classList.add('incorrect');
+                });
             }
         });
-        const total = activeInputs.length;
+
+        const totalWords = words.length;
         const resultDiv = document.getElementById('crosswordResult');
-        if (correctCount === total) {
-            resultDiv.innerHTML = '🎉 Поздравляем! Вы разгадали кроссворд! 🎉';
+
+        if (correctWords === totalWords) {
+            resultDiv.innerHTML = '🎉 Поздравляем! Вы разгадали все слова! 🎉';
             resultDiv.style.color = '#28a745';
-            // Конфетти
+            // Блёстки
             for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const x = Math.random() * window.innerWidth;
@@ -2109,12 +2127,12 @@ END:VCALENDAR`;
                 }, i * 50);
             }
         } else {
-            resultDiv.innerHTML = `Вы отгадали ${correctCount} из ${total} букв. Попробуйте ещё!`;
+            resultDiv.innerHTML = `Угадано слов: ${correctWords} из ${totalWords}. Попробуйте ещё!`;
             resultDiv.style.color = '#dc3545';
         }
     });
 
-    // Добавляем анимацию для конфетти, если её нет
+    // Добавляем стиль для блёсток, если его нет
     if (!document.querySelector('#celebration-style')) {
         const style = document.createElement('style');
         style.id = 'celebration-style';
