@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Боря & Юля • Свадьба 1 Июля 2026</title>
+    <title>Боря & Юля • Свадьба 4 Июля 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ========== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ========== */
         :root {
-            /* Розовые цвета для фона и меха */
             --rose-bg: #f8e4f5;
             --rose-light: #f5d5f0;
             --rose-fur: #eccbe6;
@@ -16,7 +15,6 @@
             --shadow-light: rgba(90, 74, 87, 0.1);
             --shadow-medium: rgba(90, 74, 87, 0.2);
             
-            /* Цвета для металлических элементов */
             --metal-silver: #e0e5e9;
             --metal-dark: #b0b7be;
             --metal-highlight: #f5f7fa;
@@ -36,7 +34,6 @@
             box-sizing: border-box;
         }
         
-        /* ========== ОСНОВНЫЕ СТИЛИ ========== */
         body {
             background-color: var(--rose-bg);
             color: var(--text-dark);
@@ -78,44 +75,67 @@
         
         /* ========== МЕТАЛЛИЧЕСКИЕ ЭЛЕМЕНТЫ ========== */
         .metal-title {
-            font-size: 3.8rem;
-            margin-bottom: 25px;
-            background: 
-                linear-gradient(145deg, 
-                    var(--metal-highlight) 0%,
-                    var(--metal-silver) 25%,
-                    var(--metal-dark) 50%,
-                    var(--metal-shadow) 75%,
-                    #a0a8b0 100%
-                ),
-                var(--metal-brushed);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 
-                2px 2px 4px rgba(0,0,0,0.1),
-                -1px -1px 1px rgba(255,255,255,0.5),
-                0 0 20px rgba(255,255,255,0.1);
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-            padding: 0 10px;
-        }
-        
-        .metal-title::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            background: linear-gradient(145deg, 
-                rgba(255,255,255,0.3) 0%,
-                transparent 50%
-            );
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            z-index: -1;
-        }
+    font-size: 5rem;
+    margin-bottom: 25px;
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    letter-spacing: 2px;
+    background: 
+        linear-gradient(145deg,
+            var(--metal-silver) 0%,
+            var(--metal-dark) 30%,
+            var(--metal-silver) 70%,
+            var(--metal-highlight) 100%
+        ),
+        var(--metal-brushed);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.2),
+        -1px -1px 2px rgba(255,255,255,0.5),
+        0 0 8px rgba(255,255,255,0.3);
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.1));
+    -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+    transform: perspective(500px) rotateX(0.5deg);
+    transition: transform 0.3s ease;
+}
+
+/* Скользящий блик ТОЛЬКО по буквам */
+.metal-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    pointer-events: none;
+    animation: shine-slide 3s infinite;
+    z-index: 2;
+}
+
+@keyframes shine-slide {
+    0% { background-position: -100% 0; }
+    50% { background-position: 100% 0; }
+    100% { background-position: 100% 0; }
+}
+
+/* При наведении — лёгкий подъём */
+.metal-title:hover {
+    transform: translateY(-5px) perspective(500px) rotateX(1deg);
+    filter: drop-shadow(0 5px 10px rgba(255,255,255,0.3));
+}
         
         /* Цепочки */
         .chain-link {
@@ -196,7 +216,6 @@
             overflow: hidden;
         }
         
-        /* Эффект блика на бейдже */
         .date-badge::before {
             content: '';
             position: absolute;
@@ -332,7 +351,6 @@
             filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
         }
         
-        /* Секции */
         .section {
             background: rgba(255, 255, 255, 0.85);
             padding: 50px;
@@ -346,7 +364,6 @@
             overflow: hidden;
         }
         
-        /* Эффект ворсинок по краям */
         .section:before {
             content: '';
             position: absolute;
@@ -384,7 +401,7 @@
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             color: var(--text-dark);
             position: relative;
             display: inline-block;
@@ -415,7 +432,6 @@
             animation: float 8s infinite ease-in-out reverse;
         }
         
-        /* Карточки с информацией */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -466,7 +482,6 @@
                 -8px -8px 15px rgba(255,255,255,0.6);
         }
         
-        /* Форма */
         .form-group {
             margin-bottom: 30px;
         }
@@ -514,7 +529,6 @@
             accent-color: var(--metal-dark);
         }
         
-        /* Футер */
         footer {
             text-align: center;
             padding: 60px 0 40px;
@@ -620,56 +634,45 @@
         /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 768px) {
             .metal-title {
-                font-size: 2.8rem;
+                font-size: 3.5rem;
             }
-            
             .date-badge {
                 font-size: 1.5rem;
                 padding: 15px 30px;
             }
-            
             .section {
                 padding: 35px 25px;
             }
-            
             .section-title {
                 font-size: 2rem;
             }
-            
             .info-grid {
                 grid-template-columns: 1fr;
             }
-            
             .radio-group {
                 flex-direction: column;
                 gap: 20px;
             }
-            
             .chain-link {
                 width: 30px;
                 height: 6px;
             }
-            
             .chain-link::before,
             .chain-link::after {
                 width: 12px;
                 height: 12px;
                 top: -3px;
             }
-            
             .chain-link::before {
                 left: -6px;
             }
-            
             .chain-link::after {
                 right: -6px;
             }
-            
             .metal-button {
                 padding: 15px 35px;
                 font-size: 1.2rem;
             }
-            
             body {
                 cursor: default;
             }
@@ -677,65 +680,399 @@
         
         @media (max-width: 480px) {
             .metal-title {
-                font-size: 2.2rem;
+                font-size: 2.8rem;
             }
-            
             .date-badge {
                 font-size: 1.3rem;
                 padding: 12px 25px;
             }
-            
             .heart-separator {
                 gap: 10px;
             }
-            
             .chain-link {
                 width: 25px;
             }
         }
+        
         .color-palette {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        
+        .color-chip {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            display: inline-block;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* ========== ГАЛЕРЕЯ ========== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                10px 10px 20px var(--shadow-light),
+                -5px -5px 10px rgba(255,255,255,0.6),
+                0 0 0 2px rgba(255,255,255,0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            background: linear-gradient(145deg, var(--metal-silver), var(--metal-dark));
+            padding: 4px;
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 18px;
+            background: var(--metal-brushed);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                15px 15px 30px var(--shadow-medium),
+                -8px -8px 15px rgba(255,255,255,0.7),
+                0 0 0 3px rgba(255,255,255,0.9);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 16px;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Лайтбокс */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.4),
+                0 0 0 5px rgba(255,255,255,0.2);
+            background: linear-gradient(145deg, var(--metal-silver), var(--metal-dark));
+            padding: 5px;
+        }
+        
+        .lightbox-content img {
+            display: block;
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 16px;
+            object-fit: contain;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 10001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            transform: scale(1.1);
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(0,0,0,0.3);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+        
+        .lightbox-prev {
+            left: 20px;
+        }
+        
+        .lightbox-next {
+            right: 20px;
+        }
+        
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: rgba(0,0,0,0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            .lightbox-prev,
+            .lightbox-next {
+                width: 40px;
+                height: 40px;
+                font-size: 2rem;
+            }
+            .lightbox-close {
+                top: 10px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 2rem;
+            }
+        }
+        
+        /* Ссылка в металлическом стиле */
+        .metal-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: 
+                linear-gradient(145deg,
+                    var(--metal-silver) 0%,
+                    var(--metal-dark) 30%,
+                    var(--metal-silver) 70%,
+                    var(--metal-highlight) 100%
+                ),
+                var(--metal-brushed);
+            border-radius: 40px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 
+                0 5px 12px rgba(0,0,0,0.15),
+                inset 0 1px 3px rgba(255,255,255,0.6),
+                inset 0 -1px 3px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            border: none;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metal-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 18px rgba(0,0,0,0.2),
+                inset 0 2px 4px rgba(255,255,255,0.7),
+                inset 0 -2px 4px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(255,255,255,0.3);
+            color: #1a2a3a;
+        }
+        
+        .metal-link:active {
+            transform: translateY(0);
+            box-shadow: 
+                0 2px 6px rgba(0,0,0,0.15),
+                inset 0 3px 6px rgba(0,0,0,0.1),
+                inset 0 -1px 2px rgba(255,255,255,0.4);
+        }
+        
+        .metal-link i {
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+        
+        @media (max-width: 768px) {
+            .metal-link {
+                padding: 10px 18px;
+                font-size: 0.95rem;
+            }
+        }
+        .title-glitter {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: title-glitter-fade 2.6s ease-out forwards;
+}
+
+@keyframes title-glitter-fade {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) translateY(-20px);
+        opacity: 0;
+    }
+}
+
+.gallery-wrapper {
+    position: relative;
     display: flex;
-    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.gallery-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 25px;
+    padding: 10px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--metal-dark) var(--rose-light);
+    flex: 1;
+    scroll-snap-type: x mandatory;
+}
+
+.gallery-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery-grid::-webkit-scrollbar-track {
+    background: var(--rose-light);
+    border-radius: 10px;
+}
+
+.gallery-grid::-webkit-scrollbar-thumb {
+    background: var(--metal-dark);
+    border-radius: 10px;
+}
+
+.gallery-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--metal-shadow);
+}
+
+.gallery-item {
+    flex: 0 0 auto;
+    width: 250px; /* регулируйте под свой размер */
+    height: 250px;
+    scroll-snap-align: start;
+}
+
+.gallery-nav {
+    background: linear-gradient(145deg,
+        var(--metal-silver) 0%,
+        var(--metal-dark) 30%,
+        var(--metal-silver) 70%,
+        var(--metal-highlight) 100%);
+    border: none;
+    color: #2c3e50;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.6);
+    transition: all 0.3s ease;
+    z-index: 2;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    margin: 10px 0;
+    margin: 0 10px;
+    flex-shrink: 0;
 }
 
-.color-chip {
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
-    display: inline-block;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.gallery-nav:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-.info-card {
-    /* Ваши существующие стили */
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 15px 0;
+.gallery-nav:active {
+    transform: scale(0.95);
 }
 
-.dress-code-combined {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.gender-palette {
-    text-align: center;
+@media (max-width: 768px) {
+    .gallery-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        margin: 0 5px;
+    }
 }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        emailjs.init('mjhW8nqASAj1xP3WL'); // ваш public key
+    })();
+</script>
 </head>
 <body>
-    <!-- Текстура меха на фоне -->
     <div class="fur-effect"></div>
-    
-    <!-- Контейнер для анимированных элементов -->
     <div class="decoration-container" id="decorationContainer"></div>
     
-    <!-- Основной контент -->
     <div class="container">
         <header>
             <h1 class="metal-title" data-text="Боря & Юля">Боря & Юля</h1>
@@ -746,7 +1083,7 @@
                 <div class="chain-link"></div>
             </div>
             
-            <div class="date-badge">1 Июля 2026</div>
+            <div class="date-badge">4 Июля 2026</div>
             
             <p style="font-size: 1.5rem; max-width: 800px; margin: 0 auto;">
                 Приглашаем вас разделить с нами радость свадебного торжества
@@ -755,51 +1092,59 @@
         
         <!-- Детали свадьбы -->
         <section class="section" id="details">
-            <h2 class="section-title">Детали свадьбы</h2>
+            <h2 class="section-title">Детали мероприятия</h2>
             
             <div class="info-grid">
                 <div class="info-card">
-                    <div class="info-icon">📅</div>
-                    <h3>Дата и время</h3>
-                    <p><strong>1 июля 2026 года</strong></p>
-                    <p>Начало в 16:00</p>
-                    <p>Сбор гостей с 15:30</p>
-                </div>
+    <div class="info-icon">📅</div>
+    <h3>Дата и время</h3>
+    <p><strong>4 июля 2026 года</strong></p>
+    <p>Начало в 15:00</p>
+    <p>Сбор гостей с 14:30</p>
+    <!-- Кнопка добавления в календарь -->
+    <button class="calendar-btn metal-link" onclick="addToCalendar()">
+        <i class="fas fa-calendar-plus" style="margin-right: 8px;"></i>Добавить в календарь
+    </button>
+</div>
                 
                 <div class="info-card">
                     <div class="info-icon">📍</div>
                     <h3>Место проведения</h3>
-                    <p><strong>Ресторан "Белый лебедь"</strong></p>
-                    <p>ул. Цветочная, 25, Москва</p>
-                    <p>Банкетный зал "Серебряный зал"</p>
+                    <p><strong>ArchiLoft - event space</strong></p>
+                    <p>Сколковское ш., 31 с 4, Москва, 121353</p>
                 </div>
                 
                 <!-- Блок для женщин -->
-<div class="info-card">
-    <div class="info-icon color-palette">
-        <span class="color-chip" style="background-color: #eccbe6;"></span>
-        <span class="color-chip" style="background-color: #f812cd;"></span>
-        <span class="color-chip" style="background-color: #000000;"></span>
-    </div>
-    <h3>Дресс-код для женщин</h3>
-    <p>Вечерние наряды в холодных тонах</p>
-    <p><strong>Цветовая гамма:</strong> серебристый, розовый, чёрный</p>
-    <p>Предпочтительно: платья серебристых и холодных розовых оттенков</p>
-</div>
+                <div class="info-card">
+                    <div class="info-icon color-palette">
+                        <span class="color-chip" style="background-color: #eccbe6;"></span>
+                        <span class="color-chip" style="background-color: #f812cd;"></span>
+                        <span class="color-chip" style="background-color: #000000;"></span>
+                    </div>
+                    <h3>Дресс-код для женщин</h3>
+                    <p><strong>Цветовая гамма:</strong> оттенки розового, чёрный</p>
+                    <p>Платья, юбки, брючные костюмы.</p>
+                    <p>Желательны необычные формы/текстуры и аксессуары.</p>
+                    <a href="https://pin.it/18PU6Pbva" target="_blank" class="metal-link">
+                        <i class="fab fa-pinterest" style="margin-right: 8px;"></i> Идеи для вдохновения
+                    </a>
+                </div>
 
-<!-- Блок для мужчин -->
-<div class="info-card">
-    <div class="info-icon color-palette">
-        <span class="color-chip" style="background-color: #adadad;"></span>
-        <span class="color-chip" style="background-color: #eccbe6;"></span>
-        <span class="color-chip" style="background-color: #000000;"></span>
-    </div>
-    <h3>Дресс-код для мужчин</h3>
-    <p>Классические костюмы</p>
-    <p><strong>Цветовая гамма:</strong> чёрный, серый, розовый</p>
-    <p>Пиджаки, жилеты или аксессуары в указанной палитре</p>
-</div>
-
+                <!-- Блок для мужчин -->
+                <div class="info-card">
+                    <div class="info-icon color-palette">
+                        <span class="color-chip" style="background-color: #eccbe6;"></span>
+                        <span class="color-chip" style="background-color: #adadad;"></span>
+                        <span class="color-chip" style="background-color: #000000;"></span>   
+                    </div>
+                    <h3>Дресс-код для мужчин</h3>
+                    <p><strong>Цветовая гамма:</strong> чёрный, серебристый, серый, розовый</p>
+                    <p>Пиджаки, жилеты или аксессуары в указанной палитре.</p>
+                    <p>Желательны необычные формы/текстуры и аксессуары.</p>
+                    <a href="https://pin.it/1v3owOg5L" target="_blank" class="metal-link">
+                        <i class="fab fa-pinterest" style="margin-right: 8px;"></i> Идеи для вдохновения
+                    </a>
+                </div>
             </div>
             
             <div style="text-align: center; margin: 40px 0;">
@@ -808,6 +1153,44 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Галерея фотографий -->
+        <section class="section" id="gallery">
+    <h2 class="section-title">Это мы</h2>
+    <div class="gallery-wrapper">
+        <button class="gallery-nav gallery-prev" aria-label="Предыдущие фото">❮</button>
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-item" data-index="0">
+                <img src="photos_site/photo1.jpg" alt="Фото 1" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="1">
+                <img src="photos_site/photo2.jpg" alt="Фото 2" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="2">
+                <img src="photos_site/photo3.jpg" alt="Фото 3" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="3">
+                <img src="photos_site/photo4.jpg" alt="Фото 4" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="4">
+                <img src="photos_site/photo5.jpg" alt="Фото 5" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="5">
+                <img src="photos_site/photo6.jpg" alt="Фото 6" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="6">
+                <img src="photos_site/photo7.jpg" alt="Фото 7" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="7">
+                <img src="photos_site/photo8.jpg" alt="Фото 8" loading="lazy">
+            </div>
+            <div class="gallery-item" data-index="8">
+                <img src="photos_site/photo9.jpg" alt="Фото 9" loading="lazy">
+            </div>
+        </div>
+        <button class="gallery-nav gallery-next" aria-label="Следующие фото">❯</button>
+    </div>
+</section>
         
         <!-- Форма подтверждения -->
         <section class="section" id="rsvp">
@@ -837,20 +1220,45 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
-                    <label class="form-label">Количество гостей (включая вас)</label>
-                    <select class="form-input" id="guestsCount">
-                        <option value="1">1</option>
-                        <option value="2" selected>2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <label class="form-label">Нужно ли парковочное место для автомобиля?</label>
+                    <select class="form-input" id="parking">
+                        <option value="yes">Да</option>
+                        <option value="no" selected>Нет</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Ваши предпочтения по напиткам</label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="drinks[]" value="white_wine"> Белое вино
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="drinks[]" value="red_wine"> Красное вино
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="drinks[]" value="whiskey"> Виски
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="drinks[]" value="vodka"> Водка
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="drinks[]" value="gin"> Джин
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="drinks[]" value="champagne"> Шампанское
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="drinks[]" value="no"> Не буду пить алкоголь
+                        </label>
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">Ваши пожелания или вопросы</label>
-                    <textarea class="form-input" id="message" rows="4" placeholder="Ваши пожелания молодым..."></textarea>
+                    <textarea class="form-input" id="message" rows="4" placeholder="..."></textarea>
                 </div>
                 
                 <button type="submit" class="metal-button">
@@ -881,204 +1289,231 @@
     </div>
 
     <script>
-        // Создание блесток
-        function createGlitter() {
-            const container = document.getElementById('decorationContainer');
-            const glitterCount = 80;
-            
-            for (let i = 0; i < glitterCount; i++) {
-                const glitter = document.createElement('div');
-                glitter.className = 'glitter';
-                
-                const size = Math.random() * 6 + 2;
-                const left = Math.random() * 100;
-                const duration = Math.random() * 15 + 10;
-                const delay = Math.random() * 10;
-                const opacity = Math.random() * 0.8 + 0.2;
-                
-                glitter.style.width = `${size}px`;
-                glitter.style.height = `${size}px`;
-                glitter.style.left = `${left}vw`;
-                glitter.style.opacity = opacity;
-                glitter.style.animationDuration = `${duration}s`;
-                glitter.style.animationDelay = `${delay}s`;
-                glitter.style.background = `rgba(255, 255, 255, ${opacity})`;
-                glitter.style.boxShadow = `0 0 ${size*2}px rgba(255, 255, 255, 0.8)`;
-                
-                container.appendChild(glitter);
-            }
+    // ========== ДЕКОРАТИВНЫЕ ЭФФЕКТЫ (блёстки, пузырьки, эмодзи) ==========
+    function createGlitter() {
+        const container = document.getElementById('decorationContainer');
+        const glitterCount = 80;
+        for (let i = 0; i < glitterCount; i++) {
+            const glitter = document.createElement('div');
+            glitter.className = 'glitter';
+            const size = Math.random() * 6 + 2;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 15 + 10;
+            const delay = Math.random() * 10;
+            const opacity = Math.random() * 0.8 + 0.2;
+            glitter.style.width = `${size}px`;
+            glitter.style.height = `${size}px`;
+            glitter.style.left = `${left}vw`;
+            glitter.style.opacity = opacity;
+            glitter.style.animationDuration = `${duration}s`;
+            glitter.style.animationDelay = `${delay}s`;
+            glitter.style.background = `rgba(255, 255, 255, ${opacity})`;
+            glitter.style.boxShadow = `0 0 ${size*2}px rgba(255, 255, 255, 0.8)`;
+            container.appendChild(glitter);
         }
-        
-        // Создание пузырьков
-        function createBubbles() {
-            const container = document.getElementById('decorationContainer');
-            const bubbleCount = 30;
-            
-            for (let i = 0; i < bubbleCount; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                
-                const size = Math.random() * 40 + 20;
-                const left = Math.random() * 100;
-                const duration = Math.random() * 20 + 15;
-                const delay = Math.random() * 15;
-                const opacity = Math.random() * 0.3 + 0.1;
-                
-                bubble.style.width = `${size}px`;
-                bubble.style.height = `${size}px`;
-                bubble.style.left = `${left}vw`;
-                bubble.style.opacity = opacity;
-                bubble.style.animationDuration = `${duration}s`;
-                bubble.style.animationDelay = `${delay}s`;
-                bubble.style.background = `rgba(255, 255, 255, ${opacity})`;
-                
-                container.appendChild(bubble);
-            }
+    }
+
+    function createBubbles() {
+        const container = document.getElementById('decorationContainer');
+        const bubbleCount = 30;
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 40 + 20;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 20 + 15;
+            const delay = Math.random() * 15;
+            const opacity = Math.random() * 0.3 + 0.1;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${left}vw`;
+            bubble.style.opacity = opacity;
+            bubble.style.animationDuration = `${duration}s`;
+            bubble.style.animationDelay = `${delay}s`;
+            bubble.style.background = `rgba(255, 255, 255, ${opacity})`;
+            container.appendChild(bubble);
         }
-        
-        // Создание эмодзи-декора
-        function createEmojiDecor() {
-            const container = document.getElementById('decorationContainer');
-            const emojis = ['🩷', '🤍', '✨', '💫', '🌸'];
-            const count = 15;
-            
-            for (let i = 0; i < count; i++) {
-                const emoji = document.createElement('div');
-                emoji.className = 'emoji-decor';
-                
-                const size = Math.random() * 3 + 1.5;
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 10;
-                const emojiChar = emojis[Math.floor(Math.random() * emojis.length)];
-                
-                emoji.textContent = emojiChar;
-                emoji.style.left = `${left}vw`;
-                emoji.style.top = `${top}vh`;
-                emoji.style.fontSize = `${size}rem`;
-                emoji.style.animationDuration = `${duration}s`;
-                emoji.style.animationDelay = `${delay}s`;
-                
-                container.appendChild(emoji);
-            }
+    }
+
+    function createEmojiDecor() {
+        const container = document.getElementById('decorationContainer');
+        const emojis = ['🩷', '🤍', '✨', '💫', '🌸'];
+        const count = 15;
+        for (let i = 0; i < count; i++) {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji-decor';
+            const size = Math.random() * 3 + 1.5;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 10;
+            const emojiChar = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.textContent = emojiChar;
+            emoji.style.left = `${left}vw`;
+            emoji.style.top = `${top}vh`;
+            emoji.style.fontSize = `${size}rem`;
+            emoji.style.animationDuration = `${duration}s`;
+            emoji.style.animationDelay = `${delay}s`;
+            container.appendChild(emoji);
         }
-        
-        // Блестки, следующие за курсором
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth <= 768) return;
-            
-            if (Math.random() > 0.5) {
-                const glitter = document.createElement('div');
-                glitter.style.position = 'fixed';
-                glitter.style.width = '4px';
-                glitter.style.height = '4px';
-                glitter.style.background = 'rgba(255, 255, 255, 0.9)';
-                glitter.style.borderRadius = '50%';
-                glitter.style.pointerEvents = 'none';
-                glitter.style.zIndex = '9999';
-                glitter.style.left = `${e.clientX + (Math.random()-0.5)*20}px`;
-                glitter.style.top = `${e.clientY + (Math.random()-0.5)*20}px`;
-                glitter.style.boxShadow = '0 0 6px rgba(255, 255, 255, 0.8)';
-                glitter.style.animation = 'cursor-trail 0.8s linear forwards';
-                
-                document.body.appendChild(glitter);
-                
-                setTimeout(() => {
-                    if (glitter.parentNode) {
-                        glitter.parentNode.removeChild(glitter);
-                    }
-                }, 800);
+    }
+
+    // ========== БЛЁСТКИ ЗА КУРСОРОМ ==========
+    document.addEventListener('mousemove', (e) => {
+        if (window.innerWidth <= 768) return;
+        if (Math.random() > 0.5) {
+            const glitter = document.createElement('div');
+            glitter.style.position = 'fixed';
+            glitter.style.width = '4px';
+            glitter.style.height = '4px';
+            glitter.style.background = 'rgba(255, 255, 255, 0.9)';
+            glitter.style.borderRadius = '50%';
+            glitter.style.pointerEvents = 'none';
+            glitter.style.zIndex = '9999';
+            glitter.style.left = `${e.clientX + (Math.random()-0.5)*20}px`;
+            glitter.style.top = `${e.clientY + (Math.random()-0.5)*20}px`;
+            glitter.style.boxShadow = '0 0 6px rgba(255, 255, 255, 0.8)';
+            glitter.style.animation = 'cursor-trail 0.8s linear forwards';
+            document.body.appendChild(glitter);
+            setTimeout(() => {
+                if (glitter.parentNode) glitter.parentNode.removeChild(glitter);
+            }, 800);
+        }
+    });
+
+    const style = document.createElement('style');
+    style.textContent = `@keyframes cursor-trail { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }`;
+    document.head.appendChild(style);
+
+    // ========== ФУНКЦИЯ ДЛЯ ПРАЗДНИЧНЫХ БЛЁСТОК (ГЛОБАЛЬНАЯ) ==========
+    function createCelebrationGlitter(x, y) {
+        const glitter = document.createElement('div');
+        glitter.style.position = 'fixed';
+        glitter.style.width = '8px';
+        glitter.style.height = '8px';
+        glitter.style.background = `rgba(${Math.random()*255},${Math.random()*255},255,0.9)`;
+        glitter.style.borderRadius = '50%';
+        glitter.style.pointerEvents = 'none';
+        glitter.style.zIndex = '9999';
+        glitter.style.left = `${x}px`;
+        glitter.style.top = `${y}px`;
+        glitter.style.boxShadow = '0 0 10px rgba(255,255,255,0.8)';
+        glitter.style.animation = 'celebration 1.5s ease-out forwards';
+        if (!document.querySelector('#celebration-style')) {
+            const style = document.createElement('style');
+            style.id = 'celebration-style';
+            style.textContent = `@keyframes celebration { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(0); opacity: 0; } }`;
+            document.head.appendChild(style);
+        }
+        document.body.appendChild(glitter);
+        setTimeout(() => {
+            if (glitter.parentNode) glitter.parentNode.removeChild(glitter);
+        }, 1500);
+    }
+
+    // ========== ОБРАБОТЧИК ФОРМЫ ==========
+    document.getElementById('weddingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Сбор данных
+        const name = document.getElementById('guestName').value.trim();
+        const email = document.getElementById('guestEmail').value.trim();
+        const attendance = document.querySelector('input[name="attendance"]:checked')?.value;
+        const parking = document.getElementById('parking').value;
+        const message = document.getElementById('message').value;
+
+        if (!name || !email || !attendance) {
+            alert('Пожалуйста, заполните все обязательные поля');
+            return;
+        }
+
+        const drinkCheckboxes = document.querySelectorAll('input[name="drinks[]"]:checked');
+        if (drinkCheckboxes.length === 0) {
+            alert('Пожалуйста, выберите хотя бы один напиток');
+            return;
+        }
+        const drinks = Array.from(drinkCheckboxes).map(cb => cb.value);
+
+        const formData = {
+            name,
+            email,
+            attendance,
+            parking,
+            drinks,
+            message,
+            timestamp: new Date().toLocaleString('ru-RU')
+        };
+
+        const attendanceText = formData.attendance === 'yes' ? 'присутствовать' : 'отсутствовать';
+        const attendanceEmoji = formData.attendance === 'yes' ? '🥂🤍' : '😔💌';
+
+        // Отправка через EmailJS
+        try {
+            if (window.emailjs) {
+                await emailjs.send(
+                    'service_pogcowb',
+                    'template_b68qnpo',
+                    {
+                        from_name: formData.name,
+                        reply_to: formData.email,
+                        attendance: formData.attendance,
+                        parking: formData.parking,
+                        drinks: formData.drinks.join(', '),
+                        message: formData.message,
+                        date: formData.timestamp
+                    },
+                    'mjhW8nqASAj1xP3WL'
+                );
+                console.log('Письмо отправлено');
+            } else {
+                console.warn('EmailJS не подключён, данные:', formData);
+                alert('Отправка писем временно недоступна. Данные сохранены в консоли.');
+                // Здесь можно добавить fallback, например, просто показать модалку без отправки
             }
-        });
-        
-        // Добавление CSS для блесток курсора
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes cursor-trail {
-                0% { transform: scale(1); opacity: 1; }
-                100% { transform: scale(0); opacity: 0; }
-            }
+        } catch (error) {
+            console.error('Ошибка отправки:', error);
+            alert('Произошла ошибка при отправке. Попробуйте ещё раз или свяжитесь с нами напрямую.');
+            return;
+        }
+
+        // Показываем модальное окно
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center;
+            z-index: 10000; backdrop-filter: blur(5px);
         `;
-        document.head.appendChild(style);
-        
-        // Обработка формы
-        document.getElementById('weddingForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('guestName').value,
-                email: document.getElementById('guestEmail').value,
-                attendance: document.querySelector('input[name="attendance"]:checked').value,
-                guestsCount: document.getElementById('guestsCount').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toLocaleString('ru-RU')
-            };
-            
-            const attendanceText = formData.attendance === 'yes' ? 'присутствовать' : 'отсутствовать';
-            const attendanceEmoji = formData.attendance === 'yes' ? '🥂🤍' : '😔💌';
-            
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.7);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10000;
-                backdrop-filter: blur(5px);
-            `;
-            
-            const modalContent = document.createElement('div');
-            modalContent.style.cssText = `
-                background: rgba(255, 255, 255, 0.95);
-                padding: 40px;
-                border-radius: 20px;
-                max-width: 500px;
-                width: 90%;
-                text-align: center;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-                border: 2px solid rgba(255,255,255,0.3);
-            `;
-            
-            modalContent.innerHTML = `
-                <div style="font-size: 4rem; margin-bottom: 20px;">${attendanceEmoji}</div>
-                <h2 style="color: #5a4a57; margin-bottom: 20px; font-size: 2rem;">Спасибо, ${formData.name}!</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 15px; color: #5a4a57;">
-                    Ваш ответ принят.
-                </p>
-                <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">
-                    Вы подтвердили, что будете ${attendanceText} на свадьбе.
-                </p>
-                <p style="font-size: 1.1rem; margin-bottom: 30px; color: #666;">
-                    Количество гостей: ${formData.guestsCount}
-                </p>
-                <p style="font-size: 1rem; color: #888; margin-bottom: 30px;">
-                    Мы свяжемся с вами для уточнения деталей.
-                </p>
-                <button id="closeModal" style="
-                    padding: 12px 40px;
-                    background: linear-gradient(135deg, #e8e8e8, #c9c9c9);
-                    border: none;
-                    border-radius: 50px;
-                    font-size: 1.1rem;
-                    color: #5a4a57;
-                    cursor: pointer;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                ">Закрыть</button>
-            `;
-            
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-            
-            document.getElementById('closeModal').addEventListener('click', () => {
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = `
+            background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px;
+            max-width: 500px; width: 90%; text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.3);
+        `;
+
+        modalContent.innerHTML = `
+            <div style="font-size: 4rem; margin-bottom: 20px;">${attendanceEmoji}</div>
+            <h2 style="color: #5a4a57; margin-bottom: 20px; font-size: 2rem;">Спасибо, ${formData.name}!</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 15px; color: #5a4a57;">Ваш ответ принят.</p>
+            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">Вы подтвердили, что будете ${attendanceText} на свадьбе.</p>
+            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">Парковка: ${formData.parking === 'yes' ? 'нужна' : 'не нужна'}</p>
+            <p style="font-size: 1.1rem; margin-bottom: 30px; color: #666;">Напитки: ${formData.drinks.join(', ')}</p>
+            <p style="font-size: 1rem; color: #888; margin-bottom: 30px;">Мы свяжемся с вами для уточнения деталей.</p>
+            <button id="closeModal" style="
+                padding: 12px 40px; background: linear-gradient(135deg, #e8e8e8, #c9c9c9);
+                border: none; border-radius: 50px; font-size: 1.1rem; color: #5a4a57;
+                cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            ">Закрыть</button>
+        `;
+
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        const closeBtn = modalContent.querySelector('#closeModal');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
                 document.body.removeChild(modal);
                 document.getElementById('weddingForm').reset();
-                
                 if (formData.attendance === 'yes') {
                     for (let i = 0; i < 20; i++) {
                         setTimeout(() => {
@@ -1089,75 +1524,252 @@
                     }
                 }
             });
-            
-            // Отправка данных через EmailJS
-            try {
-                console.log('Данные формы:', formData);
-                
-                // Раскомментируйте и настройте EmailJS если нужно
-                /*
-                emailjs.send('service_pogcowb', 'template_b68qnpo', {
-                    from_name: formData.name,
-                    reply_to: formData.email,
-                    attendance: formData.attendance,
-                    guests: formData.guestsCount,
-                    message: formData.message,
-                    date: formData.timestamp
-                }, 'mjhW8nqASAj1xP3WL');
-                */
-                
-            } catch (error) {
-                console.error('Ошибка отправки:', error);
-            }
+        }
+    });
+
+    // ========== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ==========
+    document.addEventListener('DOMContentLoaded', () => {
+        createGlitter();
+        createBubbles();
+        createEmojiDecor();
+    });
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.body.style.cursor = 'default';
+    }
+
+    // ========== ГАЛЕРЕЯ И ЛАЙТБОКС ==========
+    (function() {
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <button class="lightbox-close">&times;</button>
+            <button class="lightbox-prev">❮</button>
+            <button class="lightbox-next">❯</button>
+            <div class="lightbox-content"><img src="" alt=""></div>
+        `;
+        document.body.appendChild(lightbox);
+
+        const lightboxImg = lightbox.querySelector('img');
+        const closeBtn = lightbox.querySelector('.lightbox-close');
+        const prevBtn = lightbox.querySelector('.lightbox-prev');
+        const nextBtn = lightbox.querySelector('.lightbox-next');
+        let currentIndex = 0;
+        let images = [];
+
+        function initGallery() {
+            const items = document.querySelectorAll('.gallery-item');
+            images = Array.from(items).map(item => item.querySelector('img').src);
+            items.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentIndex = index;
+                    openLightbox(images[currentIndex]);
+                });
+            });
+        }
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            lightboxImg.src = images[currentIndex];
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            lightboxImg.src = images[currentIndex];
+        }
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
         });
-        
-        // Функция для создания праздничных блесток
-        function createCelebrationGlitter(x, y) {
-            const glitter = document.createElement('div');
-            glitter.style.position = 'fixed';
-            glitter.style.width = '8px';
-            glitter.style.height = '8px';
-            glitter.style.background = `rgba(${Math.random()*255},${Math.random()*255},255,0.9)`;
-            glitter.style.borderRadius = '50%';
-            glitter.style.pointerEvents = 'none';
-            glitter.style.zIndex = '9999';
-            glitter.style.left = `${x}px`;
-            glitter.style.top = `${y}px`;
-            glitter.style.boxShadow = '0 0 10px rgba(255,255,255,0.8)';
-            glitter.style.animation = 'celebration 1.5s ease-out forwards';
-            
-            const style = document.createElement('style');
-            if (!document.querySelector('#celebration-style')) {
-                style.id = 'celebration-style';
-                style.textContent = `
-                    @keyframes celebration {
-                        0% { transform: translateY(0) scale(1); opacity: 1; }
-                        100% { transform: translateY(-100px) scale(0); opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            document.body.appendChild(glitter);
-            
-            setTimeout(() => {
-                if (glitter.parentNode) {
-                    glitter.parentNode.removeChild(glitter);
+
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', showPrev);
+        nextBtn.addEventListener('click', showNext);
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft') showPrev();
+            else if (e.key === 'ArrowRight') showNext();
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initGallery);
+        } else {
+            initGallery();
+        }
+    })();
+
+    // ========== БЛЁСТКИ НА ЗАГОЛОВКЕ ==========
+    const title = document.querySelector('.metal-title');
+    if (title) {
+        function createTitleGlitter(event) {
+            const rect = title.getBoundingClientRect();
+            const count = 55;
+            const colors = [
+                'rgba(255, 255, 255, 0.95)',
+                'rgba(230, 240, 255, 0.9)',
+                'rgba(255, 240, 245, 0.9)',
+                'rgba(240, 248, 255, 0.95)',
+                'rgba(255, 255, 240, 0.9)'
+            ];
+            for (let i = 0; i < count; i++) {
+                const glitter = document.createElement('div');
+                glitter.className = 'title-glitter';
+                let x, y;
+                if (event && event.type === 'click') {
+                    x = event.clientX + (Math.random() - 0.5) * 100;
+                    y = event.clientY + (Math.random() - 0.5) * 100;
+                } else {
+                    x = rect.left + Math.random() * rect.width;
+                    y = rect.top + Math.random() * rect.height;
                 }
-            }, 1500);
+                glitter.style.left = x + 'px';
+                glitter.style.top = y + 'px';
+                const size = Math.random() * 10 + 4;
+                glitter.style.width = size + 'px';
+                glitter.style.height = size + 'px';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                glitter.style.background = color;
+                glitter.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+                glitter.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(glitter);
+                setTimeout(() => {
+                    if (glitter.parentNode) glitter.parentNode.removeChild(glitter);
+                }, 2000);
+            }
         }
-        
-        // Инициализация при загрузке
-        document.addEventListener('DOMContentLoaded', () => {
-            createGlitter();
-            createBubbles();
-            createEmojiDecor();
-        });
-        
-        // Адаптация для мобильных
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            document.body.style.cursor = 'default';
+        title.addEventListener('mouseenter', createTitleGlitter);
+        title.addEventListener('click', createTitleGlitter);
+    }
+
+    // ========== ДОБАВЛЕНИЕ В КАЛЕНДАРЬ ==========
+    function addToCalendar() {
+        const event = {
+            title: 'Свадьба Бори и Юли',
+            description: 'Приглашаем вас разделить с нами радость свадебного торжества',
+            location: 'Сколковское ш., 31 с 4, Москва, 121353',
+            start: new Date('2026-07-04T15:00:00+03:00'),
+            end: new Date('2026-07-05T01:00:00+03:00')
+        };
+        const formatDate = (date) => {
+            const pad = (n) => (n < 10 ? '0' + n : n);
+            return date.getUTCFullYear() +
+                pad(date.getUTCMonth() + 1) +
+                pad(date.getUTCDate()) + 'T' +
+                pad(date.getUTCHours()) +
+                pad(date.getUTCMinutes()) +
+                pad(date.getUTCSeconds()) + 'Z';
+        };
+        const startStr = formatDate(event.start);
+        const endStr = formatDate(event.end);
+        const nowStr = formatDate(new Date());
+        const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Borya&Yulia//Wedding//RU
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:${Date.now()}@borya-yulia-wedding
+DTSTAMP:${nowStr}
+DTSTART:${startStr}
+DTEND:${endStr}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+STATUS:CONFIRMED
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Напоминание о свадьбе Бори и Юли
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'borya-yulia-wedding.ics';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+    }
+
+    // ========== КАРУСЕЛЬ ==========
+    (function() {
+        const gallery = document.getElementById('galleryGrid');
+        const prevBtn = document.querySelector('.gallery-prev');
+        const nextBtn = document.querySelector('.gallery-next');
+        let autoScrollInterval;
+        const scrollDelay = 3000;
+
+        function scrollToNext() {
+            if (!gallery) return;
+            const itemWidth = gallery.querySelector('.gallery-item')?.offsetWidth || 0;
+            const gap = 25;
+            gallery.scrollBy({ left: itemWidth + gap, behavior: 'smooth' });
         }
-    </script>
+
+        function scrollToPrev() {
+            if (!gallery) return;
+            const itemWidth = gallery.querySelector('.gallery-item')?.offsetWidth || 0;
+            const gap = 25;
+            gallery.scrollBy({ left: -(itemWidth + gap), behavior: 'smooth' });
+        }
+
+        function startAutoScroll() {
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
+            autoScrollInterval = setInterval(scrollToNext, scrollDelay);
+        }
+
+        function stopAutoScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        let restartTimeout;
+        function pauseAndRestart() {
+            stopAutoScroll();
+            if (restartTimeout) clearTimeout(restartTimeout);
+            restartTimeout = setTimeout(startAutoScroll, 1000);
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                scrollToPrev();
+                pauseAndRestart();
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                scrollToNext();
+                pauseAndRestart();
+            });
+        }
+
+        if (gallery) {
+            gallery.addEventListener('scroll', pauseAndRestart, { passive: true });
+            gallery.addEventListener('mouseenter', stopAutoScroll);
+            gallery.addEventListener('mouseleave', startAutoScroll);
+        }
+
+        startAutoScroll();
+    })();
+</script>
 </body>
 </html>
