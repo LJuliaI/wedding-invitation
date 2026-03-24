@@ -1650,40 +1650,37 @@
             return;
         }
 
-        // Проверка аллергии
-const allergy = document.querySelector('input[name="allergy"]:checked');
-if (!allergy) {
-    alert('Пожалуйста, укажите, есть ли у вас пищевая аллергия');
-    return;
-}
-if (allergy.value === 'yes') {
-    const allergyText = allergyDetails.value.trim();
-    if (!allergyText) {
-        alert('Пожалуйста, укажите, на что именно у вас аллергия');
+        // Аллергия
+const allergy = document.querySelector('input[name="allergy"]:checked')?.value;
+let allergyDetails = '';
+if (allergy === 'yes') {
+    allergyDetails = document.getElementById('allergyDetails').value.trim();
+    if (!allergyDetails) {
+        alert('Пожалуйста, укажите, на что у вас аллергия');
         return;
     }
 }
 
-// Проверка выбора основного блюда
-const meal = document.querySelector('input[name="meal"]:checked');
+// Предпочтения по еде
+const meal = document.querySelector('input[name="meal"]:checked')?.value;
 if (!meal) {
-    alert('Пожалуйста, выберите предпочтение по основному блюду');
+    alert('Пожалуйста, выберите предпочтения по еде');
     return;
 }
         const drinks = Array.from(drinkCheckboxes).map(cb => cb.value);
 
         const formData = {
-            name,
-            email,
-            attendance,
-            parking,
-            drinks,
-            message,
-            timestamp: new Date().toLocaleString('ru-RU'),
-            allergy: allergy.value,
-            allergyDetails: allergy.value === 'yes' ? allergyDetails.value.trim() : '',
-            meal: meal.value
-        };
+    name,
+    email,
+    attendance,
+    parking,
+    drinks,
+    allergy,
+    allergyDetails,
+    meal,
+    message,
+    timestamp: new Date().toLocaleString('ru-RU')
+};
 
         const attendanceText = formData.attendance === 'yes' ? 'присутствовать' : 'отсутствовать';
         const attendanceEmoji = formData.attendance === 'yes' ? '🥂🤍' : '😔💌';
@@ -1695,17 +1692,17 @@ if (!meal) {
                     'service_pogcowb',
                     'template_b68qnpo',
                     {
-                        from_name: formData.name,
-                        reply_to: formData.email,
-                        attendance: formData.attendance,
-                        parking: formData.parking,
-                        drinks: formData.drinks.join(', '),
-                        allergy: formData.allergy === 'yes' ? 'Да' : 'Нет',
-                        allergy_details: formData.allergyDetails,
-                        meal: formData.meal,
-                        message: formData.message,
-                        date: formData.timestamp
-                    },
+    from_name: formData.name,
+    reply_to: formData.email,
+    attendance: formData.attendance,
+    parking: formData.parking,
+    drinks: formData.drinks.join(', '),
+    allergy: formData.allergy,
+    allergy_details: formData.allergyDetails,
+    meal: formData.meal,
+    message: formData.message,
+    date: formData.timestamp
+}
                     'mjhW8nqASAj1xP3WL'
                 );
                 console.log('Письмо отправлено');
