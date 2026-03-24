@@ -1082,7 +1082,6 @@
     position: relative;
     width: 40px;
     height: 40px;
-    border: 2px solid var(--metal-silver);
     border-radius: 5px;
     background: white;
     box-sizing: border-box;
@@ -1105,13 +1104,23 @@
     border-color: transparent;
     pointer-events: none;
 }
+/* Стили для обводки */
+.crossword-cell.horizontal {
+    border: 2px solid #c0c0c0; /* серебристый */
+}
+.crossword-cell.vertical {
+    border: 2px solid #eccbe6; /* розовый */
+}
+.crossword-cell.both {
+    border: 2px solid #c0c0c0;
+    box-shadow: inset 0 0 0 2px #eccbe6;
+}
+/* Подсветка правильных/неправильных слов */
 .crossword-cell.correct {
     background: #d4edda;
-    border-color: #28a745;
 }
 .crossword-cell.incorrect {
     background: #f8d7da;
-    border-color: #dc3545;
 }
 .crossword-number {
     position: absolute;
@@ -1121,6 +1130,18 @@
     font-weight: normal;
     color: #5a4a57;
     pointer-events: none;
+}
+@media (max-width: 480px) {
+    .crossword-cell {
+        width: 30px;
+        height: 30px;
+    }
+    .crossword-cell input {
+        font-size: 1.2rem;
+    }
+    .crossword-number {
+        font-size: 0.5rem;
+    }
 }
 @media (max-width: 480px) {
     .crossword-cell {
@@ -1172,8 +1193,10 @@
     <div class="info-icon">📅</div>
     <h3>Дата и время</h3>
     <p><strong>4 июля 2026 года</strong></p>
-    <p>Начало в 15:00</p>
-    <p>Сбор гостей с 14:30</p>
+    <p>15:00 - сбор гостей</p>
+    <p>16:00 - церемония</p>
+    <p>17:00 - банкет</p> 
+    <p>23:00 - окончание мероприятия</p>                          
     <!-- Кнопка добавления в календарь -->
     <button class="calendar-btn metal-link" onclick="addToCalendar()">
         <i class="fas fa-calendar-plus" style="margin-right: 8px;"></i>Добавить в календарь
@@ -1219,7 +1242,45 @@
                     </a>
                 </div>
             </div>
-            
+           
+<!-- Примечание о подарках в стиле мессенджера -->
+<div class="gift-note" style="margin: 40px 0 20px; padding: 20px; background: rgba(255,255,255,0.6); border-radius: 20px; border-left: 4px solid var(--metal-dark);">
+    <div style="font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; text-align: center;">
+        Вместо цветов и традиционных подарков 💌
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Вопрос 1 -->
+        <div style="display: flex; justify-content: flex-start;">
+            <div style="max-width: 80%; background: rgba(255,255,255,0.9); padding: 12px 16px; border-radius: 20px 20px 20px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                🌸 Почему не цветы?
+            </div>
+        </div>
+        <!-- Ответ 1 -->
+        <div style="display: flex; justify-content: flex-end;">
+            <div style="max-width: 80%; background: rgba(224,229,233,0.6); padding: 12px 16px; border-radius: 20px 20px 5px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                Наш пушистый питомец обожает пробовать цветы на вкус, а многие из них опасны для животных. К тому же после свадьбы мы сразу уезжаем в путешествие — красотой просто не успеем насладиться.
+            </div>
+        </div>
+        <!-- Вопрос 2 -->
+        <div style="display: flex; justify-content: flex-start;">
+            <div style="max-width: 80%; background: rgba(255,255,255,0.9); padding: 12px 16px; border-radius: 20px 20px 20px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                🛋️ Почему не сервизы и постельное бельё?
+            </div>
+        </div>
+        <!-- Ответ 2 -->
+        <div style="display: flex; justify-content: flex-end;">
+            <div style="max-width: 80%; background: rgba(224,229,233,0.6); padding: 12px 16px; border-radius: 20px 20px 5px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                Всё необходимое для дома у нас уже есть в избытке, а для новых приобретений нужна… новая квартира 😊
+            </div>
+        </div>
+        <!-- Финальное сообщение (общее) -->
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <div style="background: rgba(255,255,255,0.7); padding: 12px 20px; border-radius: 30px; text-align: center; max-width: 90%;">
+                Мы очень ценим ваше внимание и будем рады просто вашему присутствию. Если же вы хотите порадовать нас — лучший подарок: <strong>конверт с денежным вкладом в нашу будущую уютную квартиру</strong>. 💝
+            </div>
+        </div>
+    </div>
+</div>
             <div style="text-align: center; margin: 40px 0;">
                 <div style="display: inline-block; padding: 10px 40px; background: linear-gradient(90deg, transparent, rgba(224, 229, 233, 0.5), transparent); border-radius: 2px;">
                     <div style="font-size: 1.5rem;">✨🤍✨</div>
@@ -1329,6 +1390,48 @@
                     </div>
                 </div>
                 
+                <!-- Вопрос о пищевой аллергии -->
+<div class="form-group">
+    <label class="form-label">Есть ли у вас пищевая аллергия? *</label>
+    <div class="radio-group">
+        <div class="radio-option">
+            <input type="radio" id="allergyYes" name="allergy" value="yes" required>
+            <label for="allergyYes">Да</label>
+        </div>
+        <div class="radio-option">
+            <input type="radio" id="allergyNo" name="allergy" value="no" required>
+            <label for="allergyNo">Нет</label>
+        </div>
+    </div>
+</div>
+
+<!-- Поле для описания аллергии (появляется при выборе "Да") -->
+<div class="form-group" id="allergyDetailsGroup" style="display: none;">
+    <label class="form-label">На что именно аллергия? *</label>
+    <input type="text" class="form-input" id="allergyDetails" placeholder="Например: орехи, морепродукты, лактоза...">
+</div>
+
+<!-- Вопрос о предпочтениях по еде -->
+<div class="form-group">
+    <label class="form-label">Ваши предпочтения по основному блюду *</label>
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
+        <label style="display: flex; align-items: center; gap: 5px;">
+            <input type="radio" name="meal" value="chicken" required> Курица
+        </label>
+        <label style="display: flex; align-items: center; gap: 5px;">
+            <input type="radio" name="meal" value="meat"> Мясо
+        </label>
+        <label style="display: flex; align-items: center; gap: 5px;">
+            <input type="radio" name="meal" value="fish"> Рыба
+        </label>
+        <label style="display: flex; align-items: center; gap: 5px;">
+            <input type="radio" name="meal" value="vegetarian"> Вегетарианское
+        </label>
+    </div>
+</div>
+
+
+
                 <div class="form-group">
                     <label class="form-label">Ваши пожелания или вопросы</label>
                     <textarea class="form-input" id="message" rows="4" placeholder="..."></textarea>
@@ -1356,7 +1459,7 @@
             </p>
             
             <div class="contact-info">
-                <p>По всем вопросам: +7 (916) 489-57-13 | yanawinx@list.ru</p>
+                <p>По всем вопросам просьба обращаться к нашему оргнизатору: +7 (916) 639-05-39 (Мира) | тг: @sonnmiiii</p>
             </div>
         </footer>
     </div>
@@ -1546,6 +1649,27 @@
             alert('Пожалуйста, выберите хотя бы один напиток');
             return;
         }
+
+        // Проверка аллергии
+const allergy = document.querySelector('input[name="allergy"]:checked');
+if (!allergy) {
+    alert('Пожалуйста, укажите, есть ли у вас пищевая аллергия');
+    return;
+}
+if (allergy.value === 'yes') {
+    const allergyText = allergyDetails.value.trim();
+    if (!allergyText) {
+        alert('Пожалуйста, укажите, на что именно у вас аллергия');
+        return;
+    }
+}
+
+// Проверка выбора основного блюда
+const meal = document.querySelector('input[name="meal"]:checked');
+if (!meal) {
+    alert('Пожалуйста, выберите предпочтение по основному блюду');
+    return;
+}
         const drinks = Array.from(drinkCheckboxes).map(cb => cb.value);
 
         const formData = {
@@ -1555,7 +1679,10 @@
             parking,
             drinks,
             message,
-            timestamp: new Date().toLocaleString('ru-RU')
+            timestamp: new Date().toLocaleString('ru-RU'),
+            allergy: allergy.value,
+            allergyDetails: allergy.value === 'yes' ? allergyDetails.value.trim() : '',
+            meal: meal.value
         };
 
         const attendanceText = formData.attendance === 'yes' ? 'присутствовать' : 'отсутствовать';
@@ -1573,6 +1700,9 @@
                         attendance: formData.attendance,
                         parking: formData.parking,
                         drinks: formData.drinks.join(', '),
+                        allergy: formData.allergy === 'yes' ? 'Да' : 'Нет',
+                        allergy_details: formData.allergyDetails,
+                        meal: formData.meal,
                         message: formData.message,
                         date: formData.timestamp
                     },
@@ -1612,6 +1742,12 @@
             <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">Вы подтвердили, что будете ${attendanceText} на свадьбе.</p>
             <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">Парковка: ${formData.parking === 'yes' ? 'нужна' : 'не нужна'}</p>
             <p style="font-size: 1.1rem; margin-bottom: 30px; color: #666;">Напитки: ${formData.drinks.join(', ')}</p>
+            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">
+                Аллергия: ${formData.allergy === 'yes' ? `Да (${formData.allergyDetails})` : 'Нет'}
+            </p>
+            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">
+                Основное блюдо: ${formData.meal === 'chicken' ? 'Курица' : formData.meal === 'meat' ? 'Мясо' : formData.meal === 'fish' ? 'Рыба' : 'Вегетарианское'}
+            </p>
             <p style="font-size: 1rem; color: #888; margin-bottom: 30px;">Мы свяжемся с вами для уточнения деталей.</p>
             <button id="closeModal" style="
                 padding: 12px 40px; background: linear-gradient(135deg, #e8e8e8, #c9c9c9);
@@ -1772,7 +1908,7 @@
     function addToCalendar() {
         const event = {
             title: 'Свадьба Бори и Юли',
-            description: 'Приглашаем вас разделить с нами радость свадебного торжества',
+            description: 'Приглашаем тебя разделить с нами радость свадебного торжества! Загляни на сайт https://ljuliai.github.io/wedding-invitation Большая просьба соблюдать дресс-код, обязательно просмотри подборки в питерест - они наиболее точно отражают тематику вечера! Также просим воздержаться от цветов/ сервизов посуды/ постельного белья и т.п. в качетсве подарка и отдать предпочтение купюрам в конверте. ',
             location: 'Сколковское ш., 31 с 4, Москва, 121353',
             start: new Date('2026-07-04T15:00:00+03:00'),
             end: new Date('2026-07-05T01:00:00+03:00')
@@ -1905,86 +2041,31 @@ END:VCALENDAR`;
 })();
 
 (function() {
-    // ---------- Данные сетки ----------
     const rows = 13, cols = 10;
     const gridData = Array(rows).fill().map(() => Array(cols).fill(null));
 
-    // Заполнение буквами (все заглавные)
-    // 1: ШМУПС
-    gridData[0][0] = 'Ш';
-    gridData[0][1] = 'М';
-    gridData[0][2] = 'У';
-    gridData[0][3] = 'П';
-    gridData[0][4] = 'С';
-    // 2: МАЛАЙЗИЯ
-    gridData[0][1] = 'М'; // уже есть
-    gridData[1][1] = 'А';
-    gridData[2][1] = 'Л';
-    gridData[3][1] = 'А';
-    gridData[4][1] = 'Й';
-    gridData[5][1] = 'З';
-    gridData[6][1] = 'И';
-    gridData[7][1] = 'Я';
-    // 7: КИРИЛЛОВ
-    gridData[6][0] = 'К';
-    gridData[6][1] = 'И';
-    gridData[6][2] = 'Р';
-    gridData[6][3] = 'И';
-    gridData[6][4] = 'Л';
-    gridData[6][5] = 'Л';
-    gridData[6][6] = 'О';
-    gridData[6][7] = 'В';
-    // 6: ПИТЕР
-    gridData[5][3] = 'П';
-    gridData[6][3] = 'И';
-    gridData[7][3] = 'Т';
-    gridData[8][3] = 'Е';
-    gridData[9][3] = 'Р';
-    // 8: МИРА
-    gridData[9][1] = 'М';
-    gridData[9][2] = 'И';
-    gridData[9][3] = 'Р';
-    gridData[9][4] = 'А';
-    // 5: КАЛЬЯННАЯ
-    gridData[4][5] = 'К';
-    gridData[5][5] = 'А';
-    gridData[6][5] = 'Л';
-    gridData[7][5] = 'Ь';
-    gridData[8][5] = 'Я';
-    gridData[9][5] = 'Н';
-    gridData[10][5] = 'Н';
-    gridData[11][5] = 'А';
-    gridData[12][5] = 'Я';
-    // 9: ЛЯХ
-    gridData[12][4] = 'Л';
-    gridData[12][5] = 'Я';
-    gridData[12][6] = 'Х';
-    // 4: РОЗОВЫЙ
-    gridData[2][7] = 'Р';
-    gridData[3][7] = 'О';
-    gridData[4][7] = 'З';
-    gridData[5][7] = 'О';
-    gridData[6][7] = 'В';
-    gridData[7][7] = 'Ы';
-    gridData[8][7] = 'Й';
-    // 3: СЕРЫЙ
-    gridData[2][5] = 'С';
-    gridData[2][6] = 'Е';
-    gridData[2][7] = 'Р';
-    gridData[2][8] = 'Ы';
-    gridData[2][9] = 'Й';
+    // Заполнение буквами (все заглавные) – без изменений
+    gridData[0][0] = 'Ш'; gridData[0][1] = 'М'; gridData[0][2] = 'У'; gridData[0][3] = 'П'; gridData[0][4] = 'С';
+    gridData[1][1] = 'А'; gridData[2][1] = 'Л'; gridData[3][1] = 'А'; gridData[4][1] = 'Й'; gridData[5][1] = 'З'; gridData[6][1] = 'И'; gridData[7][1] = 'Я';
+    gridData[6][0] = 'К'; gridData[6][1] = 'И'; gridData[6][2] = 'Р'; gridData[6][3] = 'И'; gridData[6][4] = 'Л'; gridData[6][5] = 'Л'; gridData[6][6] = 'О'; gridData[6][7] = 'В';
+    gridData[5][3] = 'П'; gridData[6][3] = 'И'; gridData[7][3] = 'Т'; gridData[8][3] = 'Е'; gridData[9][3] = 'Р';
+    gridData[9][1] = 'М'; gridData[9][2] = 'И'; gridData[9][3] = 'Р'; gridData[9][4] = 'А';
+    gridData[4][5] = 'К'; gridData[5][5] = 'А'; gridData[6][5] = 'Л'; gridData[7][5] = 'Ь'; gridData[8][5] = 'Я'; gridData[9][5] = 'Н'; gridData[10][5] = 'Н'; gridData[11][5] = 'А'; gridData[12][5] = 'Я';
+    gridData[12][4] = 'Л'; gridData[12][5] = 'Я'; gridData[12][6] = 'Х';
+    gridData[2][7] = 'Р'; gridData[3][7] = 'О'; gridData[4][7] = 'З'; gridData[5][7] = 'О'; gridData[6][7] = 'В'; gridData[7][7] = 'Ы'; gridData[8][7] = 'Й';
+    gridData[2][5] = 'С'; gridData[2][6] = 'Е'; gridData[2][7] = 'Р'; gridData[2][8] = 'Ы'; gridData[2][9] = 'Й';
 
-    // ---------- Слова и их координаты ----------
+    // Слова и их координаты
     const words = [
-        { number: 1, cells: [[0,0],[0,1],[0,2],[0,3],[0,4]], answer: 'ШМУПС' },
-        { number: 2, cells: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1]], answer: 'МАЛАЙЗИЯ' },
-        { number: 3, cells: [[2,5],[2,6],[2,7],[2,8],[2,9]], answer: 'СЕРЫЙ' },
-        { number: 4, cells: [[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7]], answer: 'РОЗОВЫЙ' },
-        { number: 5, cells: [[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5],[11,5],[12,5]], answer: 'КАЛЬЯННАЯ' },
-        { number: 6, cells: [[5,3],[6,3],[7,3],[8,3],[9,3]], answer: 'ПИТЕР' },
-        { number: 7, cells: [[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[6,7]], answer: 'КИРИЛЛОВ' },
-        { number: 8, cells: [[9,1],[9,2],[9,3],[9,4]], answer: 'МИРА' },
-        { number: 9, cells: [[12,4],[12,5],[12,6]], answer: 'ЛЯХ' }
+        { number: 1, cells: [[0,0],[0,1],[0,2],[0,3],[0,4]], answer: 'ШМУПС', type: 'horizontal' },
+        { number: 2, cells: [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1]], answer: 'МАЛАЙЗИЯ', type: 'vertical' },
+        { number: 3, cells: [[2,5],[2,6],[2,7],[2,8],[2,9]], answer: 'СЕРЫЙ', type: 'horizontal' },
+        { number: 4, cells: [[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7]], answer: 'РОЗОВЫЙ', type: 'vertical' },
+        { number: 5, cells: [[4,5],[5,5],[6,5],[7,5],[8,5],[9,5],[10,5],[11,5],[12,5]], answer: 'КАЛЬЯННАЯ', type: 'vertical' },
+        { number: 6, cells: [[5,3],[6,3],[7,3],[8,3],[9,3]], answer: 'ПИТЕР', type: 'vertical' },
+        { number: 7, cells: [[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[6,7]], answer: 'КИРИЛЛОВ', type: 'horizontal' },
+        { number: 8, cells: [[9,1],[9,2],[9,3],[9,4]], answer: 'МИРА', type: 'horizontal' },
+        { number: 9, cells: [[12,4],[12,5],[12,6]], answer: 'ЛЯХ', type: 'horizontal' }
     ];
 
     // Номера в ячейках (начала слов)
@@ -2003,8 +2084,25 @@ END:VCALENDAR`;
     const container = document.getElementById('crossword-grid');
     if (!container) return;
 
-    // Массив для быстрого доступа к клеткам по координатам
     const cellDivs = Array(rows).fill().map(() => Array(cols).fill(null));
+    const cellTypes = Array(rows).fill().map(() => Array(cols).fill(null)); // 'horizontal', 'vertical', 'both'
+
+    // Определяем, для каждой активной клетки, какие слова её содержат
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            if (gridData[row][col] === null) continue;
+            let isHorizontal = false, isVertical = false;
+            for (const word of words) {
+                if (word.cells.some(([r,c]) => r === row && c === col)) {
+                    if (word.type === 'horizontal') isHorizontal = true;
+                    if (word.type === 'vertical') isVertical = true;
+                }
+            }
+            if (isHorizontal && isVertical) cellTypes[row][col] = 'both';
+            else if (isHorizontal) cellTypes[row][col] = 'horizontal';
+            else if (isVertical) cellTypes[row][col] = 'vertical';
+        }
+    }
 
     // Создание сетки
     for (let row = 0; row < rows; row++) {
@@ -2016,6 +2114,9 @@ END:VCALENDAR`;
             if (letter === null) {
                 cell.classList.add('black');
             } else {
+                // Добавляем класс типа слова для обводки
+                if (cellTypes[row][col]) cell.classList.add(cellTypes[row][col]);
+
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.setAttribute('maxlength', '1');
@@ -2023,7 +2124,7 @@ END:VCALENDAR`;
                 input.autocomplete = 'off';
                 input.spellcheck = false;
                 cell.appendChild(input);
-                cellDivs[row][col] = { cell, input }; // сохраняем
+                cellDivs[row][col] = { cell, input };
             }
 
             // Добавляем номер, если есть
@@ -2056,9 +2157,9 @@ END:VCALENDAR`;
         });
     });
 
-    // ---------- Проверка ----------
+    // Проверка
     document.getElementById('checkCrossword').addEventListener('click', function() {
-        // Сначала убираем подсветку со всех клеток
+        // Сброс подсветки
         for (let row = 0; row < rows; row++) {
             for (let col = 0; col < cols; col++) {
                 const cell = cellDivs[row][col]?.cell;
@@ -2070,9 +2171,7 @@ END:VCALENDAR`;
 
         let correctWords = 0;
 
-        // Проверяем каждое слово
         words.forEach(word => {
-            // Собираем введённые буквы
             const entered = word.cells.map(([r, c]) => {
                 const input = cellDivs[r][c]?.input;
                 return input ? input.value.trim().toUpperCase() : '';
@@ -2080,13 +2179,11 @@ END:VCALENDAR`;
 
             if (entered === word.answer) {
                 correctWords++;
-                // Подсвечиваем все клетки слова зелёным
                 word.cells.forEach(([r, c]) => {
                     const cell = cellDivs[r][c]?.cell;
                     if (cell) cell.classList.add('correct');
                 });
             } else {
-                // Подсвечиваем все клетки слова красным
                 word.cells.forEach(([r, c]) => {
                     const cell = cellDivs[r][c]?.cell;
                     if (cell) cell.classList.add('incorrect');
@@ -2108,7 +2205,6 @@ END:VCALENDAR`;
                     if (typeof createCelebrationGlitter === 'function') {
                         createCelebrationGlitter(x, y);
                     } else {
-                        // Запасной вариант
                         const glitter = document.createElement('div');
                         glitter.style.position = 'fixed';
                         glitter.style.width = '8px';
@@ -2145,6 +2241,28 @@ END:VCALENDAR`;
         document.head.appendChild(style);
     }
 })();
+
+// Условное поле аллергии
+const allergyYes = document.getElementById('allergyYes');
+const allergyNo = document.getElementById('allergyNo');
+const allergyDetailsGroup = document.getElementById('allergyDetailsGroup');
+const allergyDetails = document.getElementById('allergyDetails');
+
+function toggleAllergyField() {
+    if (allergyYes.checked) {
+        allergyDetailsGroup.style.display = 'block';
+        allergyDetails.setAttribute('required', 'required');
+    } else {
+        allergyDetailsGroup.style.display = 'none';
+        allergyDetails.removeAttribute('required');
+        allergyDetails.value = ''; // очищаем поле
+    }
+}
+
+if (allergyYes && allergyNo) {
+    allergyYes.addEventListener('change', toggleAllergyField);
+    allergyNo.addEventListener('change', toggleAllergyField);
+}
 </script>
 </body>
 </html>
