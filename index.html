@@ -1338,121 +1338,87 @@
 </section>
         
         <!-- Форма подтверждения -->
-        <section class="section" id="rsvp">
-            <h2 class="section-title">Подтвердите присутствие</h2>
-            
-            <form id="weddingForm">
-                <div class="form-group">
-                    <label class="form-label">Ваше имя и фамилия *</label>
-                    <input type="text" class="form-input" id="guestName" placeholder="Иван Иванов" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Ваш email *</label>
-                    <input type="email" class="form-input" id="guestEmail" placeholder="example@mail.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Вы придёте на свадьбу? *</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="attendYes" name="attendance" value="yes" required>
-                            <label for="attendYes">С радостью приду 🩷</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="attendNo" name="attendance" value="no" required>
-                            <label for="attendNo">К сожалению, не смогу</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Нужно ли парковочное место для автомобиля?</label>
-                    <select class="form-input" id="parking">
-                        <option value="yes">Да</option>
-                        <option value="no" selected>Нет</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Ваши предпочтения по напиткам</label>
-                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" name="drinks[]" value="white_wine"> Белое вино
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" name="drinks[]" value="red_wine"> Красное вино
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" name="drinks[]" value="whiskey"> Виски
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" name="drinks[]" value="vodka"> Водка
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" name="drinks[]" value="gin"> Джин
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" name="drinks[]" value="champagne"> Шампанское
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="checkbox" name="drinks[]" value="no"> Не буду пить алкоголь
-                        </label>
-                    </div>
-                </div>
-                
-                <!-- Вопрос о пищевой аллергии -->
-<div class="form-group">
-    <label class="form-label">Есть ли у вас пищевая аллергия? *</label>
-    <div class="radio-group">
-        <div class="radio-option">
-            <input type="radio" id="allergyYes" name="allergy" value="yes" required>
-            <label for="allergyYes">Да</label>
+       <section class="section" id="rsvp">
+    <h2 class="section-title">Подтвердите присутствие</h2>
+    <form id="weddingForm">
+        <!-- Всегда видимые поля -->
+        <div class="form-group">
+            <label class="form-label">Ваше имя и фамилия *</label>
+            <input type="text" class="form-input" id="guestName" required>
         </div>
-        <div class="radio-option">
-            <input type="radio" id="allergyNo" name="allergy" value="no" required>
-            <label for="allergyNo">Нет</label>
+        <div class="form-group">
+            <label class="form-label">Ваш email *</label>
+            <input type="email" class="form-input" id="guestEmail" required>
         </div>
+        <div class="form-group">
+            <label class="form-label">Вы придёте на свадьбу? *</label>
+            <div class="radio-group">
+                <label class="radio-option"><input type="radio" id="attendYes" name="attendance" value="yes" required> С радостью приду 🩷</label>
+                <label class="radio-option"><input type="radio" id="attendNo" name="attendance" value="no" required> К сожалению, не смогу</label>
+            </div>
+        </div>
+
+        <!-- Условные поля (скрываются, если выбран ответ "нет") -->
+        <div class="conditional-group" id="parkingGroup">
+    <div class="form-group">
+        <label class="form-label">Нужно ли парковочное место? *</label>
+        <select class="form-input" id="parking" required>
+            <option value="yes">Да</option>
+            <option value="no" selected>Нет</option>
+        </select>
     </div>
 </div>
 
-<!-- Поле для описания аллергии (появляется при выборе "Да") -->
-<div class="form-group" id="allergyDetailsGroup" style="display: none;">
-    <label class="form-label">На что именно аллергия? *</label>
-    <input type="text" class="form-input" id="allergyDetails" placeholder="Например: орехи, морепродукты, лактоза...">
-</div>
-
-<!-- Вопрос о предпочтениях по еде -->
-<div class="form-group">
-    <label class="form-label">Ваши предпочтения по основному блюду *</label>
-    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
-        <label style="display: flex; align-items: center; gap: 5px;">
-            <input type="radio" name="meal" value="chicken" required> Курица
-        </label>
-        <label style="display: flex; align-items: center; gap: 5px;">
-            <input type="radio" name="meal" value="meat"> Мясо
-        </label>
-        <label style="display: flex; align-items: center; gap: 5px;">
-            <input type="radio" name="meal" value="fish"> Рыба
-        </label>
-        <label style="display: flex; align-items: center; gap: 5px;">
-            <input type="radio" name="meal" value="vegetarian"> Вегетарианское
-        </label>
-    </div>
-</div>
-
-
-
-                <div class="form-group">
-                    <label class="form-label">Ваши пожелания или вопросы</label>
-                    <textarea class="form-input" id="message" rows="4" placeholder="..."></textarea>
+        <div class="conditional-group" id="drinksGroup">
+            <div class="form-group">
+                <label class="form-label">Ваши предпочтения по напиткам *</label>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
+                    <label><input type="checkbox" name="drinks[]" value="white_wine"> Белое вино</label>
+                    <label><input type="checkbox" name="drinks[]" value="red_wine"> Красное вино</label>
+                    <label><input type="checkbox" name="drinks[]" value="whiskey"> Виски</label>
+                    <label><input type="checkbox" name="drinks[]" value="vodka"> Водка</label>
+                    <label><input type="checkbox" name="drinks[]" value="gin"> Джин</label>
+                    <label><input type="checkbox" name="drinks[]" value="champagne"> Шампанское</label>
+                    <label><input type="checkbox" name="drinks[]" value="no"> Не буду пить алкоголь</label>
                 </div>
-                
-                <button type="submit" class="metal-button">
-                    <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>Отправить ответ
-                </button>
-            </form>
-        </section>
+            </div>
+        </div>
+
+        <div class="conditional-group" id="allergyGroup">
+            <div class="form-group">
+                <label class="form-label">Есть ли у вас пищевая аллергия? *</label>
+                <div class="radio-group">
+                    <label class="radio-option"><input type="radio" id="allergyYes" name="allergy" value="yes"> Да</label>
+                    <label class="radio-option"><input type="radio" id="allergyNo" name="allergy" value="no" checked> Нет</label>
+                </div>
+            </div>
+            <div class="form-group" id="allergyDetailsGroup" style="display: none;">
+                <label class="form-label">На что именно аллергия? *</label>
+                <input type="text" class="form-input" id="allergyDetails" placeholder="Например: орехи, морепродукты...">
+            </div>
+        </div>
+
+        <div class="conditional-group" id="mealGroup">
+            <div class="form-group">
+                <label class="form-label">Ваши предпочтения по основному блюду *</label>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
+                    <label><input type="radio" name="meal" value="chicken" checked> Курица</label>
+                    <label><input type="radio" name="meal" value="meat"> Мясо</label>
+                    <label><input type="radio" name="meal" value="fish"> Рыба</label>
+                    <label><input type="radio" name="meal" value="vegetarian"> Вегетарианское</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Поле комментария всегда видимо -->
+        <div class="form-group">
+            <label class="form-label">Ваши пожелания или вопросы</label>
+            <textarea class="form-input" id="message" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="metal-button">Отправить ответ</button>
+    </form>
+</section>
         
         <footer>
             <p class="footer-text">С нетерпением ждём этого дня и надеемся разделить его с вами!</p>
@@ -1639,151 +1605,204 @@
         }, 1500);
     }
 
+    // ========== УПРАВЛЕНИЕ УСЛОВНЫМИ ПОЛЯМИ ==========
+const attendYes = document.getElementById('attendYes');
+const attendNo = document.getElementById('attendNo');
+const conditionalGroups = ['parkingGroup', 'drinksGroup', 'allergyGroup', 'mealGroup'].map(id => document.getElementById(id));
+
+function toggleConditionalFields() {
+    const isAttending = attendYes.checked;
+    conditionalGroups.forEach(group => {
+        if (group) {
+            group.style.display = isAttending ? 'block' : 'none';
+            const inputs = group.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (isAttending) {
+                    // ⚠️ НЕ добавляем required для чекбоксов и радиокнопок
+                    if (input.type !== 'checkbox' && input.type !== 'radio') {
+                        if (input.closest('.form-group')?.querySelector('.form-label')?.innerText.includes('*')) {
+                            input.setAttribute('required', 'required');
+                        }
+                    }
+                } else {
+                    input.removeAttribute('required');
+                    if (input.type !== 'radio' && input.type !== 'checkbox') {
+                        input.value = '';
+                    }
+                    if (input.type === 'checkbox') input.checked = false;
+                    if (input.type === 'radio') input.checked = false;
+                }
+            });
+        }
+    });
+    // Обработка аллергии (показываем поле деталей, если выбран "Да")
+    if (isAttending) {
+        const allergyYesRadio = document.getElementById('allergyYes');
+        const allergyNoRadio = document.getElementById('allergyNo');
+        const allergyDetailsGroup = document.getElementById('allergyDetailsGroup');
+        const allergyDetailsInput = document.getElementById('allergyDetails');
+        if (allergyYesRadio && allergyNoRadio) {
+            const showAllergyDetails = () => {
+                if (allergyYesRadio.checked) {
+                    allergyDetailsGroup.style.display = 'block';
+                    allergyDetailsInput.setAttribute('required', 'required');
+                } else {
+                    allergyDetailsGroup.style.display = 'none';
+                    allergyDetailsInput.removeAttribute('required');
+                    allergyDetailsInput.value = '';
+                }
+            };
+            allergyYesRadio.addEventListener('change', showAllergyDetails);
+            allergyNoRadio.addEventListener('change', showAllergyDetails);
+            showAllergyDetails();
+        }
+    } else {
+        const allergyDetailsGroup = document.getElementById('allergyDetailsGroup');
+        if (allergyDetailsGroup) allergyDetailsGroup.style.display = 'none';
+        const allergyDetailsInput = document.getElementById('allergyDetails');
+        if (allergyDetailsInput) allergyDetailsInput.removeAttribute('required');
+    }
+}
+
+if (attendYes && attendNo) {
+    attendYes.addEventListener('change', toggleConditionalFields);
+    attendNo.addEventListener('change', toggleConditionalFields);
+    toggleConditionalFields(); // установить начальное состояние
+}
+
     // ========== ОБРАБОТЧИК ФОРМЫ ==========
     document.getElementById('weddingForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
+    e.preventDefault();
 
-        // Сбор данных
-        const name = document.getElementById('guestName').value.trim();
-        const email = document.getElementById('guestEmail').value.trim();
-        const attendance = document.querySelector('input[name="attendance"]:checked')?.value;
-        const parking = document.getElementById('parking').value;
-        const message = document.getElementById('message').value;
+    const name = document.getElementById('guestName').value.trim();
+    const email = document.getElementById('guestEmail').value.trim();
+    const attendance = document.querySelector('input[name="attendance"]:checked')?.value;
+    const message = document.getElementById('message').value;
 
-        if (!name || !email || !attendance) {
-            alert('Пожалуйста, заполните все обязательные поля');
-            return;
-        }
+    if (!name || !email || !attendance) {
+        alert('Пожалуйста, заполните имя, email и статус присутствия');
+        return;
+    }
+
+    let formData = { name, email, attendance, message, timestamp: new Date().toLocaleString('ru-RU') };
+
+    if (attendance === 'yes') {
+        // ---- Обязательные поля для присутствующих ----
+        formData.parking = document.getElementById('parking').value;
 
         const drinkCheckboxes = document.querySelectorAll('input[name="drinks[]"]:checked');
         if (drinkCheckboxes.length === 0) {
             alert('Пожалуйста, выберите хотя бы один напиток');
             return;
         }
+        formData.drinks = Array.from(drinkCheckboxes).map(cb => cb.value);
 
-        // Аллергия
-const allergy = document.querySelector('input[name="allergy"]:checked')?.value;
-let allergyDetails = '';
-if (allergy === 'yes') {
-    allergyDetails = document.getElementById('allergyDetails').value.trim();
-    if (!allergyDetails) {
-        alert('Пожалуйста, укажите, на что у вас аллергия');
-        return;
-    }
-}
-
-// Предпочтения по еде
-const meal = document.querySelector('input[name="meal"]:checked')?.value;
-if (!meal) {
-    alert('Пожалуйста, выберите предпочтения по еде');
-    return;
-}
-        const drinks = Array.from(drinkCheckboxes).map(cb => cb.value);
-
-        const formData = {
-    name,
-    email,
-    attendance,
-    parking,
-    drinks,
-    allergy,
-    allergyDetails,
-    meal,
-    message,
-    timestamp: new Date().toLocaleString('ru-RU')
-};
-
-        const attendanceText = formData.attendance === 'yes' ? 'присутствовать' : 'отсутствовать';
-        const attendanceEmoji = formData.attendance === 'yes' ? '🥂🤍' : '😔💌';
-
-        // Отправка через EmailJS
-        try {
-            if (window.emailjs) {
-                await emailjs.send(
-                    'service_pogcowb',
-                    'template_b68qnpo',
-                    {
-    from_name: formData.name,
-    reply_to: formData.email,
-    attendance: formData.attendance,
-    parking: formData.parking,
-    drinks: formData.drinks.join(', '),
-    allergy: formData.allergy,
-    allergy_details: formData.allergyDetails,
-    meal: formData.meal,
-    message: formData.message,
-    date: formData.timestamp
-},
-                    'mjhW8nqASAj1xP3WL'
-                );
-                console.log('Письмо отправлено');
-            } else {
-                console.warn('EmailJS не подключён, данные:', formData);
-                alert('Отправка писем временно недоступна. Данные сохранены в консоли.');
-                // Здесь можно добавить fallback, например, просто показать модалку без отправки
-            }
-        } catch (error) {
-            console.error('Ошибка отправки:', error);
-            alert('Произошла ошибка при отправке. Попробуйте ещё раз или свяжитесь с нами напрямую.');
+        const allergy = document.querySelector('input[name="allergy"]:checked')?.value;
+        if (!allergy) {
+            alert('Пожалуйста, укажите, есть ли у вас аллергия');
             return;
         }
+        formData.allergy = allergy;
+        if (allergy === 'yes') {
+            const allergyDetails = document.getElementById('allergyDetails').value.trim();
+            if (!allergyDetails) {
+                alert('Пожалуйста, укажите, на что у вас аллергия');
+                return;
+            }
+            formData.allergyDetails = allergyDetails;
+        } else {
+            formData.allergyDetails = '';
+        }
 
-        // Показываем модальное окно
-        const modal = document.createElement('div');
-        modal.style.cssText = `
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center;
-            z-index: 10000; backdrop-filter: blur(5px);
-        `;
+        const meal = document.querySelector('input[name="meal"]:checked')?.value;
+        if (!meal) {
+            alert('Пожалуйста, выберите предпочтения по еде');
+            return;
+        }
+        formData.meal = meal;
+    } else {
+        // ---- Гость не идёт: все доп. поля пустые ----
+        formData.parking = '';
+        formData.drinks = [];
+        formData.allergy = '';
+        formData.allergyDetails = '';
+        formData.meal = '';
+    }
 
-        const modalContent = document.createElement('div');
-        modalContent.style.cssText = `
-            background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px;
-            max-width: 500px; width: 90%; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.3);
-        `;
+    // ---- Отправка через EmailJS ----
+    try {
+        if (window.emailjs) {
+            await emailjs.send(
+                'service_pogcowb',
+                'template_b68qnpo',
+                {
+                    from_name: formData.name,
+                    reply_to: formData.email,
+                    attendance: formData.attendance,
+                    parking: formData.parking,
+                    drinks: formData.drinks.join(', ') || '',
+                    allergy: formData.allergy,
+                    allergy_details: formData.allergyDetails,
+                    meal: formData.meal,
+                    message: formData.message,
+                    date: formData.timestamp
+                },
+                'mjhW8nqASAj1xP3WL'
+            );
+        } else {
+            console.warn('EmailJS не подключён');
+            alert('Отправка временно недоступна.');
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+        alert('Ошибка отправки. Попробуйте ещё раз.');
+        return;
+    }
 
+    // ---- Модальное окно ----
+    const modal = document.createElement('div');
+    modal.style.cssText = `position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:10000; backdrop-filter:blur(5px);`;
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `background:rgba(255,255,255,0.95); padding:40px; border-radius:20px; max-width:500px; width:90%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3); border:2px solid rgba(255,255,255,0.3);`;
+
+    if (attendance === 'no') {
         modalContent.innerHTML = `
-            <div style="font-size: 4rem; margin-bottom: 20px;">${attendanceEmoji}</div>
-            <h2 style="color: #5a4a57; margin-bottom: 20px; font-size: 2rem;">Спасибо, ${formData.name}!</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 15px; color: #5a4a57;">Ваш ответ принят.</p>
-            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">Вы подтвердили, что будете ${attendanceText} на свадьбе.</p>
-            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">Парковка: ${formData.parking === 'yes' ? 'нужна' : 'не нужна'}</p>
-            <p style="font-size: 1.1rem; margin-bottom: 30px; color: #666;">Напитки: ${formData.drinks.join(', ')}</p>
-            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">
-                Аллергия: ${formData.allergy === 'yes' ? `Да (${formData.allergyDetails})` : 'Нет'}
-            </p>
-            <p style="font-size: 1.1rem; margin-bottom: 10px; color: #666;">
-                Основное блюдо: ${formData.meal === 'chicken' ? 'Курица' : formData.meal === 'meat' ? 'Мясо' : formData.meal === 'fish' ? 'Рыба' : 'Вегетарианское'}
-            </p>
-            <p style="font-size: 1rem; color: #888; margin-bottom: 30px;">Мы свяжемся с вами для уточнения деталей.</p>
-            <button id="closeModal" style="
-                padding: 12px 40px; background: linear-gradient(135deg, #e8e8e8, #c9c9c9);
-                border: none; border-radius: 50px; font-size: 1.1rem; color: #5a4a57;
-                cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            ">Закрыть</button>
+            <div style="font-size:4rem;">😔💌</div>
+            <h2>Спасибо, что сообщили!</h2>
+            <p>Мы будем скучать, но обязательно встретимся в другой раз!</p>
+            <p>Если вы хотите поздравить нас, вы можете перевести подарок на номер <strong>+7 (916) 489-57-13 (Юлия)</strong>.</p>
+            <button id="closeModal" style="margin-top:20px; padding:10px 30px; background:linear-gradient(135deg,#e8e8e8,#c9c9c9); border:none; border-radius:50px; cursor:pointer;">Закрыть</button>
         `;
+    } else {
+        modalContent.innerHTML = `
+            <div style="font-size:4rem;">🥂🤍</div>
+            <h2>Спасибо, ${formData.name}!</h2>
+            <p>Вы подтвердили присутствие.</p>
+            <p>Напитки: ${formData.drinks.join(', ') || 'не выбраны'}</p>
+            <p>Аллергия: ${formData.allergy === 'yes' ? `Да (${formData.allergyDetails})` : 'Нет'}</p>
+            <p>Основное блюдо: ${formData.meal === 'chicken' ? 'Курица' : formData.meal === 'meat' ? 'Мясо' : formData.meal === 'fish' ? 'Рыба' : 'Вегетарианское'}</p>
+            <button id="closeModal" style="margin-top:20px; padding:10px 30px; background:linear-gradient(135deg,#e8e8e8,#c9c9c9); border:none; border-radius:50px; cursor:pointer;">Закрыть</button>
+        `;
+    }
 
-        modal.appendChild(modalContent);
-        document.body.appendChild(modal);
-
-        const closeBtn = modalContent.querySelector('#closeModal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                document.body.removeChild(modal);
-                document.getElementById('weddingForm').reset();
-                if (formData.attendance === 'yes') {
-                    for (let i = 0; i < 20; i++) {
-                        setTimeout(() => {
-                            const x = Math.random() * window.innerWidth;
-                            const y = Math.random() * window.innerHeight;
-                            createCelebrationGlitter(x, y);
-                        }, i * 50);
-                    }
-                }
-            });
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    document.getElementById('closeModal').addEventListener('click', () => {
+        modal.remove();
+        document.getElementById('weddingForm').reset();
+        toggleConditionalFields(); // сбросить видимость
+        if (attendance === 'yes') {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    createCelebrationGlitter(x, y);
+                }, i * 50);
+            }
         }
     });
+});
 
     // ========== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ==========
     document.addEventListener('DOMContentLoaded', () => {
